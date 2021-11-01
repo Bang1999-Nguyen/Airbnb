@@ -1,0 +1,20 @@
+.carousel{
+    height:560px;
+    width:100%;
+    background-position: bottom 5% center;
+    background-repeat: no-repeat;
+    background-size:cover;
+    position:relative;
+    .carousel__content{
+        height:300px;
+        width: 90%;
+        margin:0 auto;
+        position: absolute;
+        top:50%;
+        left: 50%;
+        transform: translate(-50%, -40%);
+        display:flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

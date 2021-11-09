@@ -3,12 +3,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment'
 import ReactMapGL from 'react-map-gl';
 import { Rate } from 'antd';
+import { NavLink } from 'react-router-dom'
 import { actFetchDetail, getCurrentDate, getCurrentLocation, getGuest } from './module/action';
 import './PageDetail.scss'
 import ContentLoader from 'react-content-loader'
-import { TOKEN_MAP } from '../../settings/apiConfig';
+import { TOKEN_MAP} from '../../settings/apiConfig';
+import Modal from '../../components/Modal/Modal';
 export default function PageDetail(props) {
     const { DetailOfLocation, loading } = useSelector(state => state.DetailReducer)
+    const [show, setShow] = useState(false)
+    const closeModalHandler  = () => setShow(false)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(actFetchDetail(props.match.params.id))
@@ -23,7 +27,9 @@ export default function PageDetail(props) {
         height:'110vh',
         width:'100%'
     });
-
+    const scroll = () => {
+        window.scrollTo(0,0)
+    }
     if (loading) return <ContentLoader viewBox="0 0 380 70">
         <rect x="0" y="0" rx="5" ry="5" width="70" height="70" />
         <rect x="80" y="17" rx="4" ry="4" width="300" height="13" />
@@ -49,11 +55,11 @@ export default function PageDetail(props) {
                                 <p>More filters</p>
                             </div>
                         </div>
-
                         {
                             DetailOfLocation?.map((location, index) => {
                                 return (
-                                    <div className="room__information">
+                                    <NavLink to={`/bookTicket/${location._id}/${location.locationId.province}/${location.guests}/${moment(props.match.params.startDate).format("MMM D")}/${moment(props.match.params.endDate).format("MMM D")}`} onClick={() => scroll()}>
+                                    <div className="room__information"  key={index} >
                                         <div className="room__item">
                                             <div className="row">
                                                 <div className="img__room" style={{ backgroundImage: `url(${location.image})` }}>
@@ -68,7 +74,6 @@ export default function PageDetail(props) {
                                                         <span>{location.guests} guests - </span>
                                                         <span>{location.bedRoom} bedrooms - </span>
                                                         <span>{location.bath} bath</span>
-
                                                     </div>
                                                     <div className="service">
                                                         <span style={{ display: `${location.wifi ? 'block' : 'none'}` }} className="wifi">Free wifi</span>
@@ -86,11 +91,14 @@ export default function PageDetail(props) {
                                             </div>
                                         </div>
                                     </div>
+                                     </NavLink>
                                 )
                             })
                         }
 
                     </div>
+                    {show ? <div className="back_drop"></div> : null}
+                <Modal show={show} closeModalHandler={closeModalHandler}/>
                     <div className="col-5 map">
                         <ReactMapGL
                             {...viewport}

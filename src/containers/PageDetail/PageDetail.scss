@@ -4,6 +4,7 @@
     width:95%;
     margin:0 auto;
     padding-bottom: 40px;
+    z-index:0;
     .row{
         .list__room{
             height: 100%;
@@ -144,8 +145,9 @@
                                 }
                                 .rate{
                                     margin-top:0px;
-                                    margin-right:70px;
+                                    margin-right:90px;
                                     text-align: left;
+                                    font-size:15px;
                                     
                                 }
                             }

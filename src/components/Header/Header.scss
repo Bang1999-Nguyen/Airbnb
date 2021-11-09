@@ -3,7 +3,7 @@
     top:0;
     left:0;
     width: 100%;
-    z-index:3;
+    z-index:1;
     height:100px;
     transition: all 0.4s ease-in-out;
     
@@ -543,7 +543,7 @@ height:13px;
 .DateInput_input__focused {
     border-bottom: none;
 }
-.DateInput_input {
+.header .DateInput_input {
     font-weight: 400;
     font-size: 15px;
     line-height: 24px;
@@ -778,4 +778,131 @@ height:13px;
         border-radius: 50%;
         color:white
     }
+}
+.information{
+    padding:8px 30px;
+    background-color:#fff;
+    border-radius: 30px;
+    margin-top:-10px;
+    position: relative;
+  
+}
+
+ .menu_select.active{
+ opacity: 1;
+    transform: scale(1);
+}.icon_selection{
+    position: absolute;
+    top:-10px;
+    right:-15px;
+    background-color: #eee;
+    -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
+    padding:15px 20px;
+    border-radius: 50%;
+  
+}
+.none_menu{
+    position: absolute;
+         top: 30%;
+         right: 4%;
+         margin-top:50px;
+         padding:20px 0;
+         display:flex;
+         flex-direction: column;
+         background-color: transparent;
+         box-shadow: none;
+         
+}
+.menu_select{
+        position: absolute;
+         top: 30%;
+         right: 4%;
+         margin-top:50px;
+         padding:20px 0;
+         display:flex;
+         flex-direction: column;
+         background-color: white;
+         width:500px;
+         z-index:9999999!important;
+         border-radius: 10px;
+         cursor: pointer;
+         -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
+  height:300px; 
+  transition: all 0.43s ease-in-out;
+  
+ display: block;
+
+  .row{
+      height:270px;
+      width:90%;
+      margin:0 auto;
+      padding:0 0 7px 0;
+      .col-6{
+          height:100%;
+          width:100%;
+         background-repeat: no-repeat;
+         background-size: cover;
+         background-position: center;
+         border-radius: 10px;
+        
+         .selection{
+             margin:20px 0;
+            h2{
+                font-size:17px;
+                font-weight:400;
+                letter-spacing: 0.03rem;
+                color:crimson
+            }
+            .signIn{
+                font-size:17px;
+                padding:10px 0;
+                margin:15px 10px;
+                background-color: #fff;
+                text-decoration: none;
+                color:white!important;
+                border-radius:5px;
+                border:1px dashed crimson;
+                cursor: pointer;
+                box-shadow: 0px 1px 2px rgb(0 0 0 / 8%), 0px 4px 12px rgb(0 0 0 / 5%) !important;
+                a{
+                   color:black!important;
+                }
+   
+            }
+            .signUp{
+               font-size:17px;
+                padding:10px 0;
+                margin:15px 10px;
+                background-color: #fff;
+                text-decoration: none;
+                color:white!important;
+                border-radius:5px;
+                border:1px dashed crimson;
+                cursor: pointer;
+                box-shadow: 0px 1px 2px rgb(0 0 0 / 8%), 0px 4px 12px rgb(0 0 0 / 5%) !important;
+                a{
+                   color:black!important;
+                }
+            }
+            .logOut{
+               font-size:17px;
+               padding:10px 0;
+               margin:15px 10px;
+               background-color: crimson;
+               text-decoration: none;
+               color:white!important;
+               border-radius:5px;
+               border:none;
+               cursor: pointer;
+               box-shadow: 0px 1px 2px rgb(0 0 0 / 8%), 0px 4px 12px rgb(0 0 0 / 5%) !important;
+               a{
+                  color:#fff!important;
+               }
+            }
+         }
+      }
+
+  }
 }

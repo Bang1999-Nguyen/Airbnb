@@ -6,9 +6,12 @@ import { NavLink } from 'react-router-dom'
 import './Header.scss'
 import moment from "moment"
 import { ADD__TRANSITION } from '../../containers/Home/Carousel/module/types';
+import Modal from '../Modal/Modal';
+import SignUp from '../Sign Up/SignUp';
+
 
 export default function Header(props) {
-    const { isDisplay, location, locationDefault, quantityPeople, totalPeople, infants, btnSelection,  startDate, endDate } = useSelector(state => state.CarouselReducer)
+    const { isDisplay, location, locationDefault, quantityPeople, totalPeople, infants, btnSelection, StartDate, EndDate, } = useSelector(state => state.CarouselReducer)
     const [isVisible, setIsVisible] = useState(false)
     const [isLocation, setLocation] = useState(false)
     const [isQuantity, setIsQuantity] = useState(false)
@@ -18,10 +21,18 @@ export default function Header(props) {
     const [id, setId] = useState('')
     const [toStay, setToStay] = useState(true)
     const [experience, setExperience] = useState(false)
+    const [modal, setModal] = useState(false)
+    const [show, setShow] = useState(false)
+    const [btn] = useState(true)
+    const closeModalHandler  = () => setShow(false)
+    const [register, setRegister] = useState(true)
     let btnSelect = [
         { type: 'toStay', select: true, name: "Places to stay" },
         { type: 'experiences', select: false, name: "Experiences" }
     ]
+    const handleSignUp = () =>{
+        setRegister(true)
+    }
     const chooseOption = (button) => {
         let btnSelectUpdate = [...btnSelect];
         btnSelectUpdate = btnSelectUpdate.map(item => {
@@ -44,25 +55,34 @@ export default function Header(props) {
             payload: btnSelect
         })
     }
+    const setShowModal = () =>{
+        setShow(true);
+        setModal(false)
+    }
+    const setShowSignUp = () =>{
+        setRegister(false);
+        setModal(false)
+    }
     const toggleVisibility = () => {
-        if (window.pageYOffset > 160) {
+        if (window.pageYOffset > 200) {
             setIsVisible(true);
             dispatch(hideOverlay())
             setIsHighlight(false)
             setIsQuantity(false)
             setToStay(false)
-        } else if (window.pageYOffset < 3) {
+            setModal(false)
+        }
+        if (window.pageYOffset < 5) {
             setIsVisible(false);
             setToStay(true)
+            setModal(false)
         }
     };
-
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(actFetchLocation());
         window.addEventListener("scroll", toggleVisibility);
-       
-    }, [])
+    }, [isVisible])
     const onSearch = (event) => {
         if (event.target.value !== '') {
             setLocation(true);
@@ -83,14 +103,17 @@ export default function Header(props) {
         })
         dispatch(clearResult())
         dispatch(isPlaceCurrent(isPlace))
-        window.scrollTo(0,0)
+        window.scrollTo(0, 0)
     }
     const changeValue = (item) => {
         document.querySelector('.value__location').value = item.province;
         dispatch(valueSelection(item.province))
         setIsPlace(item.province)
         setId(item._id)
-      
+        dispatch({
+            type: 'REMEMBER__LOCATION',
+            payload: item.province
+        })
     }
     const nearBy = () => {
         document.querySelector('.near').value = "NearBy";
@@ -98,14 +121,23 @@ export default function Header(props) {
         document.querySelector('.value__location').value = "NearBy";
     }
     const showDetail = () => {
-        document.querySelector('.search').style.display = 'block';
         dispatch(selectAction())
         setIsHighlight(true)
-        setToStay(false)
+        setToStay(true)
     }
     const displayQuantity = () => {
         setIsQuantity(true)
         dispatch(hideOverlay())
+    }
+    const setPopup = () => {
+        setModal(true);
+        document.querySelector('.menu_select').style.display = 'block';
+        document.querySelector('.menu_select').style.transform = 'scale(1)';
+    }
+    const setClosePopup = () => {
+        setModal(false);
+        document.querySelector('.menu_select').style.display = 'block';
+        document.querySelector('.menu_select').style.transform = 'scale(0)';
     }
     return location && (
         <div>
@@ -150,47 +182,77 @@ export default function Header(props) {
                                 </ul>
                             }
                             <form className="d-flex ml-auto navbar__right">
+
                                 <a className="nav-link-host">Become a host</a>
                                 <a>
                                     <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style={{ display: "block", height: '16px', width: "16px", fill: "crimson", fontWeight: 'bold', marginLeft: '-13px' }}>
                                         <path d="m8.002.25a7.77 7.77 0 0 1 7.748 7.776 7.75 7.75 0 0 1 -7.521 7.72l-.246.004a7.75 7.75 0 0 1 -7.73-7.513l-.003-.245a7.75 7.75 0 0 1 7.752-7.742zm1.949 8.5h-3.903c.155 2.897 1.176 5.343 1.886 5.493l.068.007c.68-.002 1.72-2.365 1.932-5.23zm4.255 0h-2.752c-.091 1.96-.53 3.783-1.188 5.076a6.257 6.257 0 0 0 3.905-4.829zm-9.661 0h-2.75a6.257 6.257 0 0 0 3.934 5.075c-.615-1.208-1.036-2.875-1.162-4.686l-.022-.39zm1.188-6.576-.115.046a6.257 6.257 0 0 0 -3.823 5.03h2.75c.085-1.83.471-3.54 1.059-4.81zm2.262-.424c-.702.002-1.784 2.512-1.947 5.5h3.904c-.156-2.903-1.178-5.343-1.892-5.494l-.065-.007zm2.28.432.023.05c.643 1.288 1.069 3.084 1.157 5.018h2.748a6.275 6.275 0 0 0 -3.929-5.068z"></path>
                                     </svg>
                                 </a>
-                                <a>
-                                    <div className="information">
-                                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style={{ display: "block", height: '27px', width: "27px", fill: "white", fontWeight: 'bold', marginTop: '0px', marginLeft: '-13px' }}>
+                                <a onClick={() => setPopup()}>
+                                    <div className="information" id="information">
+                                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style={{ display: "block", height: '27px', width: "27px", fill: "white!important", fontWeight: 'bold', marginTop: '0px', marginLeft: '-13px' }}>
                                             <path d="m16 .7c-8.437 0-15.3 6.863-15.3 15.3s6.863 15.3 15.3 15.3 15.3-6.863 15.3-15.3-6.863-15.3-15.3-15.3zm0 28c-4.021 0-7.605-1.884-9.933-4.81a12.425 12.425 0 0 1 6.451-4.4 6.507 6.507 0 0 1 -3.018-5.49c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5a6.513 6.513 0 0 1 -3.019 5.491 12.42 12.42 0 0 1 6.452 4.4c-2.328 2.925-5.912 4.809-9.933 4.809z"></path>
                                         </svg>
                                     </div>
+
                                 </a>
                             </form>
                         </div>
                     </div>
                 </nav>
-                <div className={`search`} style={{ display: `${toStay ? "block" : 'none'}` }}>
-                    <div className="row">
-                        <div className="point">
-                            <div>
-                                <h1>Location</h1>
-                                <input placeholder="Where are you going?" onClick={() => dispatch(selectAction())} onKeyUp={onSearch} className="value__location" />
+                {
+                    toStay ? (
+                        <div className={`search`} >
+                            <div className="row">
+                                <div className="point">
+                                    <div>
+                                        <h1>Location</h1>
+                                        <input placeholder="Where are you going?" onClick={() => dispatch(selectAction())} onKeyUp={onSearch} className="value__location" />
+                                    </div>
+                                </div>
+                                <div className="Calendar" onClick={() => {
+                                    dispatch(hideOverlay())
+                                }}>
+                                    <h1>Check in</h1>
+                                    <DatePicker />
+                                    <h2>Check out</h2>
+                                </div>
+                                <div className="find">
+                                    <h1>Guests</h1>
+                                    <input placeholder="Add guests" onClick={() => displayQuantity()} value={totalPeople === '' ? '' : totalPeople + ' guests' + `${infants > 0 ? ' , ' + infants + ' infants' : ''}`} />
+                                    <div className="icon">
+                                        <NavLink to={`/${isPlace}/${id}/${totalPeople}/${moment(StartDate).format("MMM D")}/${moment(EndDate).format("MMM D")}`} onClick={() => solveTransition()}><i class="fas fa-search"></i>Search</NavLink>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className="Calendar" onClick={() => {
-                            dispatch(hideOverlay())
-                        }}>
-                            <h1>Check in</h1>
-                            <DatePicker />
-                            <h2>Check out</h2>
-                        </div>
-                        <div className="find">
-                            <h1>Guests</h1>
-                            <input placeholder="Add guests" onClick={() => displayQuantity()} value={totalPeople === '' ? '' : totalPeople + ' guests' + `${infants > 0 ? ' , ' + infants + ' infants' : ''}`} />
-                            <div className="icon">
-                                <NavLink to={`/${isPlace}/${id}/${totalPeople}/${moment(startDate).format("MMM D")}/${moment(endDate).format("MMM D")}`} onClick={() => solveTransition()}><i class="fas fa-search"></i>Search</NavLink>
+                    ) : ''
+                }
+                {
+                    modal ? (
+
+                        <menu className={`menu_select`}>
+                            <div className="row">
+                                <div className="col-6" style={{ backgroundImage: `url('./images/krakenimages-5HsCIUSeq7Q-unsplash.jpg')` }}>
+                                </div>
+                                <div className="col-6">
+                                    <div className="selection">
+                                        <h2>Welcome to airbnb!</h2>
+                                        <div className="signIn" onClick={() => setShowModal()}><NavLink to="/">Sign in</NavLink></div>
+                                        <div className="signUp" onClick={() =>  setShowSignUp()}><NavLink to="/">Sign up</NavLink></div>
+                                        <div className="logOut"><NavLink to="/">Log out</NavLink></div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                            <div className="icon_selection" onClick={() => setClosePopup()}>
+                                <svg width="16px" height="16px" viewBox="0 0 16 16" className="icon-close w-1half h-1half absolute pinX-50 pinY-50 translate-50-ul close_icon"><g stroke="none" stroke-width="1" fill="white" fill-rule="evenodd" stroke-linecap="square"><g transform="translate(-1328.000000, -34.000000)" stroke="currentColor"><g transform="translate(1328.000000, 34.000000)"><path d="M1,1 L15,15" id="Line-3"></path> <path d="M1,1 L15,15" id="Line-3" transform="translate(8.000000, 8.000000) scale(-1, 1) rotate(-1.000000) translate(-8.000000, -8.000000) "></path></g></g></g></svg>
+                            </div>
+                        </menu>
+
+                    ) : <menu className={`menu_select`} style={{ transform: 'scale(0)' }}>
+                    </menu>
+                }
                 {
                     experience && isLocation === false ? (
                         <div className="search__experience">
@@ -295,6 +357,10 @@ export default function Header(props) {
                         </div>
                     ) : ''
                 }
+                {show ? <div className="back_drop"></div> : null}
+                <Modal show={show} closeModalHandler={closeModalHandler} btn={btn}/>
+                {register ?  null : <div className="back_drop"></div>}
+                <SignUp register={register} handleSignUp={handleSignUp} btn={btn}/>
                 {
                     isExperience && isVisible === false ? (
                         <div>

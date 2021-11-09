@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import "react-dates/initialize";
-import { useDispatch } from 'react-redux';
+import { useDispatch,  useSelector } from 'react-redux';
 import { DateRangePicker } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
 import { isCalendar } from "../../containers/Home/Carousel/module/action";
 function DatePicker(props) {
-  // console.log(startOfDate, endOfDate);
-  const [startDate, setStartDate] = useState(null);
+  const { StartDate, EndDate} = useSelector(state => state.CarouselReducer)
+  const [startDate, setStartDate] = useState(StartDate);
   const dispatch = useDispatch()
-  const [endDate, setEndDate] = useState(null);
+  const [endDate, setEndDate] = useState( EndDate);
   const [focusedInput, setFocusedInput] = useState(null);
   const handleDatesChange = ({ startDate, endDate }) => {
     setStartDate(startDate);

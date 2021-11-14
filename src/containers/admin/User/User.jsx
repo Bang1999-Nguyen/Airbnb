@@ -55,7 +55,6 @@ export default function User() {
             })
         }
     })
-   
     const [user, setUser] = useState({
         name: "",
         email: "",

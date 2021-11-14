@@ -1,4 +1,4 @@
-import { FETCH_DETAIL_FAIL, FETCH_DETAIL_REQUEST, FETCH_DETAIL_SUCCESS, GET_CURRENT_DATE, GET_CURRENT_LOCATION, GET_GUEST, GET_IMAGE } from "./types";
+import { FETCH_DETAIL_FAIL, FETCH_DETAIL_REQUEST, FETCH_DETAIL_SUCCESS, FETCH_MORE_DETAIL, GET_CURRENT_DATE, GET_CURRENT_LOCATION, GET_GUEST, GET_IMAGE } from "./types";
 
 const initialState = {
     DetailOfLocation:[],
@@ -7,7 +7,8 @@ const initialState = {
     guest:'',
     locationCurrent:'',
     startOfDate:'',
-    endOfDate:''
+    endOfDate:'',
+    moreDetail:''
   }
   const DetailReducer = (state = initialState, { type, payload }) => {
     switch (type) {
@@ -27,6 +28,9 @@ const initialState = {
      }
      case GET_CURRENT_DATE:{
       return { ...state, startOfDate: payload.startDate, endOfDate: payload.endDate};
+     }
+     case FETCH_MORE_DETAIL:{
+      return { ...state,  moreDetail: payload };
      }
       default:
         return state;

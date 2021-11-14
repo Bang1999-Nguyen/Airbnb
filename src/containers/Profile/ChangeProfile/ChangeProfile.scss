@@ -1,0 +1,192 @@
+.back_drop{
+    position: fixed;
+      margin: 0 auto;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background-color: rgba(31,32,41,.75);
+}
+.modal-close{
+    position: absolute;
+    top:-10px;
+    right:-10px;
+    background-color: #eee;
+    -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
+    padding:20px 25px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.evaluation__wrapProfileSecond{
+    height:96vh;
+    width:35%;
+    position: fixed;
+    margin:0 auto;
+   background-color: #fff;
+      top:-20%;
+  left:32.5%;
+  transform: translate(0%, -0%);
+    border-radius: 10px;
+    box-shadow: 3px 6px 20px 0px #9D9D9D;
+    transition: all 1s ease;
+    display: block;
+    z-index:3!important;
+}
+.form-Change{
+    input {
+        font-size: 16px;
+        padding: 20px 10px 10px 0px;
+        height: 50px;
+        border: none;
+        margin-left:-30px;
+        // border: solid 1px #b69de6;
+        background: #fff;
+        width: 360px;
+        box-sizing: border-box;
+        transition: all 0.3s linear;
+        color: #000;
+        font-weight: 400;
+        -webkit-appearance: none;
+        margin-bottom: 10px;
+        border-radius: 0;
+      }
+      input:focus {
+        // border-bottom: solid 1px #b69de6;
+        outline: 0;
+        // box-shadow: 0 2px 6px -8px rgba(182, 157, 230, 0.45);
+      }
+}
+.form-Change{
+    .ant-picker-focused {
+        /* border-color: #40a9ff; */
+        border-right-width: 1
+    px
+     !important;
+     border:none!important;
+    }
+}
+.form-Change{
+   .ant-picker-focused {
+        /* border-color: #40a9ff; */
+        border-right-width: 1
+    px
+     !important;
+     border:none!important;
+    }
+}
+.form-change{
+    .ant-picker {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        color: rgba(0, 0, 0, 0.85);
+        font-size: 14px;
+        font-variant: tabular-nums;
+        line-height: 1.5715;
+        list-style: none;
+        border:none!important;
+        font-feature-settings: 'tnum', "tnum";
+        padding: 4
+    px
+     11
+    px
+     4
+    px
+    ;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        background: #fff;
+        /* border: 1
+    px
+     solid #d9d9d9; */
+        border-radius: 2
+    px
+    ;
+        transition: border 0.3s, box-shadow 0.3s;
+        margin-left:10px;
+    }
+}
+.profile-name{
+    height:65px;
+    width: 80%;
+    background-color: white;
+    box-shadow:0 0 1px 0 rgba(10, 22, 70, 0.06), 0 12px 12px -1px rgba(10, 22, 70, 0.1);
+    border: 1px solid rgb(221, 221, 221);
+border-radius: 10px ;
+margin-bottom: 18px;
+transition:all 0.5s ease-in-out;
+cursor: pointer;
+margin:0 auto 20px auto;
+    i{
+        line-height:65px;
+        font-size:25px;
+         color:rgba(183, 157, 230, 0.555);
+        text-align: left;
+        float:left;
+        margin-left:30px;
+        width:14%;
+    }
+    input:focus {
+        // border-bottom: solid 1px #b69de6;
+        outline:none!important
+        // box-shadow: 0 2px 6px -8px rgba(182, 157, 230, 0.45);
+      }
+    // &:hover{
+    //     transform: scale(1.1);
+    // }
+ }
+ .profile-name{
+    .ant-picker {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        color: rgba(0, 0, 0, 0.85);
+        font-size: 14px;
+        font-variant: tabular-nums;
+        line-height: 1.5715;
+        list-style: none;
+        border:none!important;
+        font-feature-settings: 'tnum', "tnum";
+        padding: 4
+    px
+     4
+    px
+     4
+    px
+    ;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        background: #fff;
+        /* border: 1
+    px
+     solid #d9d9d9; */
+        border-radius: 2
+    px
+    ;
+        transition: border 0.3s, box-shadow 0.3s;
+        margin-left:10px;
+    }
+
+ }
+ .profile-name{
+    .ant-picker-focused {
+        /* border-color: #40a9ff; */
+        border-right-width:none!important;
+     border:none!important;
+     outline:none!important
+    }
+ }
+.changing{
+    padding:10px 30px;
+    background-color: black;
+    color:white;
+    border-radius: 6px;
+    margin:15px 0;
+    font-size:18px;
+    text-align: left;
+   
+}

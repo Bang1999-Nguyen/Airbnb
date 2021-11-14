@@ -4,13 +4,13 @@ import moment from 'moment'
 import ReactMapGL from 'react-map-gl';
 import { Rate } from 'antd';
 import { NavLink } from 'react-router-dom'
-import { actFetchDetail, getCurrentDate, getCurrentLocation, getGuest } from './module/action';
+import { actFetchDetail, actMoreDetail, getCurrentDate, getCurrentLocation, getGuest, } from './module/action';
 import './PageDetail.scss'
 import ContentLoader from 'react-content-loader'
 import { TOKEN_MAP} from '../../settings/apiConfig';
 import Modal from '../../components/Modal/Modal';
 export default function PageDetail(props) {
-    const { DetailOfLocation, loading } = useSelector(state => state.DetailReducer)
+    const { DetailOfLocation, loading,  moreDetail } = useSelector(state => state.DetailReducer)
     const [show, setShow] = useState(false)
     const closeModalHandler  = () => setShow(false)
     const dispatch = useDispatch()
@@ -19,6 +19,7 @@ export default function PageDetail(props) {
         dispatch(getGuest(props.match.params.guest))
         dispatch(getCurrentLocation(props.match.params.location))
         dispatch(getCurrentDate(props.match.params.startDate, props.match.params.endDate))
+        dispatch(actMoreDetail(props.match.params.id))
     }, [])
     const [viewport, setViewport] = useState({
         latitude: 14.315424,
@@ -37,7 +38,7 @@ export default function PageDetail(props) {
     </ContentLoader>
     return (
         <div>
-            <div className="bg_detail" style={{ backgroundImage: `url(${DetailOfLocation[0]?.locationId.image})` }}>
+            <div className="bg_detail" style={{ backgroundImage: `url(${moreDetail?.image})` }}>
 
             </div>
             <div className="main__detail">

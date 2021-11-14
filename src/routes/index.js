@@ -1,4 +1,8 @@
 import React from 'react'
+import LocationAdmin from '../containers/admin/Location/Location';
+import Location from '../containers/admin/Location/Location';
+import RoomStructure from '../containers/admin/Location/RoomStructure';
+import User from '../containers/admin/User/User';
 
 
 const PageDetail = React.lazy(() => {
@@ -33,4 +37,23 @@ export const clientRoutes = [
         exact: true,
     }
    
+]
+export const adminRoutes = [
+    {
+        path: '/admin/room/:id',
+        component: RoomStructure,
+        exact: true,
+    },
+    {
+        path: '/admin/location',
+        component:  LocationAdmin,
+        exact: true,
+        isPrivate: true,
+      },
+      {
+        path: '/admin/user',
+        component: User,
+        exact: true,
+        isPrivate: true,
+      },
 ]

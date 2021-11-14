@@ -1,6 +1,5 @@
 import callApi from "../utils/callApi";
-import axios from 'axios';
-import { access__token, TOKEN } from "../settings/apiConfig";
+import axios from 'axios';;
 
 const locationApi = {
  getLocation(token){
@@ -9,6 +8,7 @@ const locationApi = {
  getDetailOfLocation(id){
     return callApi(`api/rooms?locationId=${id}`);
    },
+  
    logIn(user){
       return callApi(`api/auth/login`, 'POST', user);
    },
@@ -68,6 +68,105 @@ const locationApi = {
          'tokenByClass': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAxMiIsIkhldEhhblN0cmluZyI6IjA4LzAzLzIwMjIiLCJIZXRIYW5UaW1lIjoiMTY0NjY5NzYwMDAwMCIsIm5iZiI6MTYxNzkwMTIwMCwiZXhwIjoxNjQ2ODQ1MjAwfQ.mPmSkXNXN1frPpzs9CbkOn1tlxu1XGzuT_3jPckLDnU'}
        });
    }
+   ,
+   updateUser(id, content, token){
+      return axios({
+         url: `https://airbnb.cybersoft.edu.vn/api/users/${id}`,
+         method: 'PUT',
+         data:content,
+         headers: {'token': `${token}`, 
+         'tokenByClass': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAxMiIsIkhldEhhblN0cmluZyI6IjA4LzAzLzIwMjIiLCJIZXRIYW5UaW1lIjoiMTY0NjY5NzYwMDAwMCIsIm5iZiI6MTYxNzkwMTIwMCwiZXhwIjoxNjQ2ODQ1MjAwfQ.mPmSkXNXN1frPpzs9CbkOn1tlxu1XGzuT_3jPckLDnU'}
+       });
+   },
+   getMoreDEtail(id){
+      return callApi(`api/locations/${id}`);
+   },
+   createNewLocation(content, token){
+      return axios({
+         url: `https://airbnb.cybersoft.edu.vn/api/locations`,
+         method: 'POST',
+         data:content,
+         headers: {'token': `${token}`, 
+         'tokenByClass': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAxMiIsIkhldEhhblN0cmluZyI6IjA4LzAzLzIwMjIiLCJIZXRIYW5UaW1lIjoiMTY0NjY5NzYwMDAwMCIsIm5iZiI6MTYxNzkwMTIwMCwiZXhwIjoxNjQ2ODQ1MjAwfQ.mPmSkXNXN1frPpzs9CbkOn1tlxu1XGzuT_3jPckLDnU'}
+       });
+   },
+   updateImageForLocation(id, image, token){
+      return axios({
+         url: `https://airbnb.cybersoft.edu.vn/api/locations/upload-images/${id}`,
+         method: 'POST',
+         data:image,
+         headers: {'token': `${token}`, 
+         'tokenByClass': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAxMiIsIkhldEhhblN0cmluZyI6IjA4LzAzLzIwMjIiLCJIZXRIYW5UaW1lIjoiMTY0NjY5NzYwMDAwMCIsIm5iZiI6MTYxNzkwMTIwMCwiZXhwIjoxNjQ2ODQ1MjAwfQ.mPmSkXNXN1frPpzs9CbkOn1tlxu1XGzuT_3jPckLDnU'}
+       });
+   },
+   updateInputLocation(id, input, token){
+      return axios({
+         url: `https://airbnb.cybersoft.edu.vn/api/locations/${id}`,
+         method: 'PUT',
+         data:input,
+         headers: {'token': `${token}`, 
+         'tokenByClass': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAxMiIsIkhldEhhblN0cmluZyI6IjA4LzAzLzIwMjIiLCJIZXRIYW5UaW1lIjoiMTY0NjY5NzYwMDAwMCIsIm5iZiI6MTYxNzkwMTIwMCwiZXhwIjoxNjQ2ODQ1MjAwfQ.mPmSkXNXN1frPpzs9CbkOn1tlxu1XGzuT_3jPckLDnU'}
+       });
+   },
+   deleteLocationAdmin(id, token){
+      return axios({
+         url: `https://airbnb.cybersoft.edu.vn/api/locations/${id}`,
+         method: 'DELETE',
+         headers: {'token': `${token}`, 
+         'tokenByClass': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAxMiIsIkhldEhhblN0cmluZyI6IjA4LzAzLzIwMjIiLCJIZXRIYW5UaW1lIjoiMTY0NjY5NzYwMDAwMCIsIm5iZiI6MTYxNzkwMTIwMCwiZXhwIjoxNjQ2ODQ1MjAwfQ.mPmSkXNXN1frPpzs9CbkOn1tlxu1XGzuT_3jPckLDnU'}
+       });
+   },
+   createRoom(room, token){
+      return axios({
+         url: `https://airbnb.cybersoft.edu.vn/api/rooms`,
+         method: 'POST',
+         data:room,
+         headers: {'token': `${token}`, 
+         'tokenByClass': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAxMiIsIkhldEhhblN0cmluZyI6IjA4LzAzLzIwMjIiLCJIZXRIYW5UaW1lIjoiMTY0NjY5NzYwMDAwMCIsIm5iZiI6MTYxNzkwMTIwMCwiZXhwIjoxNjQ2ODQ1MjAwfQ.mPmSkXNXN1frPpzs9CbkOn1tlxu1XGzuT_3jPckLDnU'}
+       });
+   },
+   changeImageValue(id, image, token){
+      return axios({
+         url: `https://airbnb.cybersoft.edu.vn/api/rooms/upload-image/${id}`,
+         method: 'POST',
+         data:image,
+         headers: {'token': `${token}`, 
+         'tokenByClass': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAxMiIsIkhldEhhblN0cmluZyI6IjA4LzAzLzIwMjIiLCJIZXRIYW5UaW1lIjoiMTY0NjY5NzYwMDAwMCIsIm5iZiI6MTYxNzkwMTIwMCwiZXhwIjoxNjQ2ODQ1MjAwfQ.mPmSkXNXN1frPpzs9CbkOn1tlxu1XGzuT_3jPckLDnU'}
+       });
+   },
+   changeRoom(id, content, token){
+      return axios({
+         url: `https://airbnb.cybersoft.edu.vn/api/rooms/${id}`,
+         method: 'PUT',
+         data:content,
+         headers: {'token': `${token}`, 
+         'tokenByClass': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAxMiIsIkhldEhhblN0cmluZyI6IjA4LzAzLzIwMjIiLCJIZXRIYW5UaW1lIjoiMTY0NjY5NzYwMDAwMCIsIm5iZiI6MTYxNzkwMTIwMCwiZXhwIjoxNjQ2ODQ1MjAwfQ.mPmSkXNXN1frPpzs9CbkOn1tlxu1XGzuT_3jPckLDnU'}
+       });
+   },
+   getUserAdmin(){
+      return callApi(`api/users/pagination`);
+   },
+   addUser(user, token){
+      return axios({
+         url: `https://airbnb.cybersoft.edu.vn/api/users`,
+         method: 'POST',
+         data:user,
+         headers: {'token': `${token}`, 
+         'tokenByClass': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAxMiIsIkhldEhhblN0cmluZyI6IjA4LzAzLzIwMjIiLCJIZXRIYW5UaW1lIjoiMTY0NjY5NzYwMDAwMCIsIm5iZiI6MTYxNzkwMTIwMCwiZXhwIjoxNjQ2ODQ1MjAwfQ.mPmSkXNXN1frPpzs9CbkOn1tlxu1XGzuT_3jPckLDnU'}
+       });
+   },
+   deleteUserAdmin(id, token){
+      return axios({
+         url: `https://airbnb.cybersoft.edu.vn/api/users/${id}`,
+         method: 'DELETE',
+         headers: {'token': `${token}`, 
+         'tokenByClass': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAxMiIsIkhldEhhblN0cmluZyI6IjA4LzAzLzIwMjIiLCJIZXRIYW5UaW1lIjoiMTY0NjY5NzYwMDAwMCIsIm5iZiI6MTYxNzkwMTIwMCwiZXhwIjoxNjQ2ODQ1MjAwfQ.mPmSkXNXN1frPpzs9CbkOn1tlxu1XGzuT_3jPckLDnU'}
+       });
+   },
+   getTicketsOfYou(id){
+      return callApi(`api/tickets/by-user?userId=${id}`);
+   }
+  
 };
 
 export default locationApi;

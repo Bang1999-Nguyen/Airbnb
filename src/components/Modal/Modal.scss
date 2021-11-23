@@ -5,8 +5,12 @@
       position: fixed;
       margin:0 auto;
      background-color: #fff;
-        top:0%;
-    left:22.5%;
+    //     top:50%;
+    // left:50%;
+    // transform: translate(-50%, -50%);
+    // top:10vh;;
+    top:2%;
+    left:19%;
     transform: translate(0%, -0%);
       border-radius: 10px;
       box-shadow: 3px 6px 20px 0px #9D9D9D;
@@ -22,7 +26,7 @@
              background-position: center;
              background-repeat: no-repeat;
           }
-          .col-7{
+          .col-lg-7{
             .signIn__title{
                 position: absolute;
                 top:50%;
@@ -32,6 +36,7 @@
                 width:100%;
                 padding:0 40px;
                 cursor: pointer;
+             
                  h2{
                      font-size:28px;
                      letter-spacing: 0.2rem;
@@ -168,3 +173,13 @@
         fill: white!important;
     }
 }
+@media only screen and (min-width:768px) and (max-width:1024px){
+    .col-5{
+        display:none
+    }
+}
+@media only screen and (min-width:411px) and (max-width:736px){
+    .col-5{
+        display:none
+    }
+    }

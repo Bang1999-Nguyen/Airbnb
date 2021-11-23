@@ -62,13 +62,13 @@ export default function Modal({ closeModalHandler, show, btn }) {
                 register ? (
                     <div className="signIn__wrap" style={{
                         opacity: show ? '1' : '0',
-                        transform: show ? 'translateY(13%)' : 'translateY(-150vh)'
+                        transform: show ? 'translateY(13%) rotate(0)' : 'translateY(-150vh) rotate(32deg)',
                     }}>
                         <div className="row">
-                            <div className="col-5" style={{ backgroundImage: 'url("https://s3.anotherescape.com/Journal/2019/Q2/Klattermusen-Interview/Spring-images/_700x640_crop_center-center_none/DS-180904-0870.jpg?mtime=20190820165517&focal=none&tmtime=20190822074759")' }}>
+                            <div className="col-5 " style={{ backgroundImage: 'url("https://s3.anotherescape.com/Journal/2020/Our-Story/_700x640_crop_center-center_none/AE-Portraits-1-2.jpg?mtime=20201130182020&focal=none&tmtime=20201130182042")' }}>
                             </div>
-                            <div className="col-7">
-                                <div className="signIn__title">
+                            <div className="col-lg-7 col-sm-12 col-sx-12">
+                                <div className="signIn__title" style={{width:'100%'}}>
                                     <h2>SI<span>G</span>N I<span>N</span></h2>
                                     <p>Welcome back! Log in to your account to view today's clients:</p>
                                     <div className="email">

@@ -10,8 +10,8 @@ export default function Footer(props) {
     return (
         <div className="footer">
             <div className="footer__infor" >
-                <div className="row" data-aos='fade-left'>
-                    <div className="col-3" >
+                <div className="row" data-aos='fade-left' data-aos-once="true">
+                    <div className="col-sm-3 col-xs-6" >
                         <h1>ABOUT</h1>
                         <div className="contact">
                             <div className="engine">
@@ -49,7 +49,7 @@ export default function Footer(props) {
                             </div>
                         </div>
                     </div>
-                    <div className="col-3">
+                    <div className="col-sm-3 col-xs-6">
                         <h1>COMMUNITY</h1>
                         <div className="contact">
                             <div className="engine">
@@ -78,7 +78,7 @@ export default function Footer(props) {
                             </div>
                         </div>
                     </div>
-                    <div className="col-3">
+                    <div className="col-sm-3 col-xs-6">
                         <h1>HOST</h1>
                         <div className="contact">
                             <div className="engine">
@@ -101,7 +101,7 @@ export default function Footer(props) {
                             </div>
                         </div>
                     </div>
-                    <div className="col-3">
+                    <div className="col-sm-3 col-xs-6">
                         <h1>SUPPORT</h1>
                         <div className="contact">
                             <div className="engine">

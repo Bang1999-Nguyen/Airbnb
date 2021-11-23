@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Modal from '../../components/Modal/Modal'
-import { USER_LOGIN } from '../../settings/apiConfig'
+import {  USER_LOGIN_AIRBNB } from '../../settings/apiConfig'
 import { useSelector, useDispatch } from 'react-redux';
 import './BookTicket.scss'
 import moment from "moment"
@@ -10,14 +10,15 @@ import { Rate } from 'antd';
 import ContentLoader from 'react-content-loader'
 import { actFetchComment, actFetchRoom } from './module/action';
 import { getCurrentDate, getCurrentLocation, getGuest } from '../PageDetail/module/action';
-import { plusAdult } from '../Home/Carousel/module/action';
+import { isCalendar, plusAdult } from '../Home/Carousel/module/action';
 import locationApi from '../../apis/airbnb';
 import { NavLink } from 'react-router-dom'
 import Comment from '../../components/Comment/Comment';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import Slider from "react-slick";
 import { css } from 'glamor';
+
 toast.configure({
     toastClassName: css({
         fontSize: '18px !important',
@@ -29,15 +30,64 @@ export default function BookingTicket(props) {
     const wave = () => toast.success('Delete  successfully👋', { position: toast.POSITION.TOP_RIGHT, autoClose: 2500 })
     const { StartDate, EndDate, quantityPeople, totalPeopleDefault } = useSelector(state => state.CarouselReducer)
     const { comment } = useSelector(state => state.RoomReducer)
-    const { token, currentUser } = useSelector(state => state.authReducer)
+    const { token, currentUser, on } = useSelector(state => state.authReducer)
     const [startDate, setStartDate] = useState(StartDate);
     const [endDate, setEndDate] = useState(EndDate);
     const { DetailOfRoom, loading } = useSelector(state => state.RoomReducer)
     const [reserve, setReserve] = useState({
         roomId: props.match.params.id,
-        checkIn: "",
-        checkOut: "",
+        checkIn: moment(props.match.params.startDate).format(),
+        checkOut: moment(props.match.params.endDate).format(),
     })
+  
+    var durationEnd =  moment(EndDate).format('MM/DD/YYYY')
+    var durationStart =  moment(StartDate).format('MM/DD/YYYY')
+    var date1 = new Date(durationEnd);
+    var date2 = new Date(durationStart);
+    var Difference_In_Time = date2.getTime() - date1.getTime();
+    var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+    function SampleNextArrow(props) {
+        const { className, style, onClick } = props;
+        return (
+          <div
+            className={className}
+            style={{ ...style, display: "block", background: "red" }}
+            onClick={onClick}
+          />
+        );
+      }
+      function SamplePrevArrow(props) {
+        const { className, style, onClick } = props;
+        return (
+          <div
+            className={className}
+            style={{ ...style, display: "block", background: "green" }}
+            onClick={onClick}
+          />
+        );
+      }
+    const settings = {
+        className: "center",
+        centerMode: true,
+        dots: true,
+        infinite: true,
+        centerPadding: "60px",
+        slidesToShow: 3,
+        speed: 500,
+        nextArrow: <SampleNextArrow />,
+        prevArrow: <SamplePrevArrow />,
+        responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                infinite: true,
+                dots: true
+              }
+            },
+        ]
+      };
     const [focusedInput, setFocusedInput] = useState(null);
     const handleDatesChange = ({ startDate, endDate }) => {
         setStartDate(startDate);
@@ -45,10 +95,12 @@ export default function BookingTicket(props) {
         setReserve(prevState => ({
             ...prevState,
             checkIn: moment(startDate).format(),
-            checkOut: moment(startDate).format()
+            checkOut: moment(endDate).format()
         }));
+        
+    dispatch(isCalendar(startDate, endDate))
     };
-    let user = localStorage.getItem(USER_LOGIN)
+    let user = localStorage.getItem(USER_LOGIN_AIRBNB)
     const [modal, setModal] = useState(false);
     const fullPayment = () => {
         locationApi.reserveRoom(reserve, token).then(response => {
@@ -59,6 +111,7 @@ export default function BookingTicket(props) {
             .catch(error => {
                 console.log(error);
             });
+        
 
     }
     const [isQuantity, setIsQuantity] = useState(false)
@@ -75,7 +128,6 @@ export default function BookingTicket(props) {
     }
     const [show, setShow] = useState(false)
     const closeModalHandler = () => setShow(false)
-
     const [btn] = useState(false)
     const dispatch = useDispatch()
     useEffect(() => {
@@ -101,6 +153,11 @@ export default function BookingTicket(props) {
     const showEvaluate = () => {
         setEvaluation(true)
     }
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postsPerPage, setPostsPerPage] = useState(3)
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = comment?.slice(indexOfFirstPost, indexOfLastPost)
     const closeModalEvaluation = () => setEvaluation(false)
     if (loading) return <ContentLoader viewBox="0 0 380 70">
         <rect x="0" y="0" rx="5" ry="5" width="70" height="70" />
@@ -110,8 +167,8 @@ export default function BookingTicket(props) {
     return DetailOfRoom && (
         <div>
             <div>
-                {!user ? <div className="back_drop"></div> : null}
-                <Modal show={!user ? true : false} closeModalHandler={closeModalHandler} btn={btn} />
+                {!user && on === false ? <div className="back_drop"></div> : null}
+                <Modal show={!user && on === false ? true : false} closeModalHandler={closeModalHandler} btn={btn} />
                 <div className="modal-backdrop" style={{
                     opacity: modal ? '1' : '0',
                     transform: modal ? 'translateY(-0vh)' : 'translateY(-100vh)',
@@ -138,7 +195,6 @@ export default function BookingTicket(props) {
                         </video>
                     </div>
                 </div>
-
                 <div className="bookTicket">
                     <div className="room__detail">
                         <div className="room__content">
@@ -231,7 +287,7 @@ export default function BookingTicket(props) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-5">
+                                    <div className="col-lg-5 col-sm-12">
                                         <div className="payment">
                                             <div className="price">
                                                 <div className="row">
@@ -316,10 +372,10 @@ export default function BookingTicket(props) {
                                             </div>
                                             <div className="total-payment">
                                                 <div className="payment_content">
-                                                    <p>{DetailOfRoom?.price?.toLocaleString()}  x {totalPeopleDefault} nights</p>
+                                                    <p>{DetailOfRoom?.price?.toLocaleString()}  x {Math.abs(Difference_In_Days)} nights</p>
                                                 </div>
                                                 <div className="money">
-                                                    <p>{(DetailOfRoom?.price * totalPeopleDefault).toLocaleString()} VNĐ</p>
+                                                    <p>{(DetailOfRoom?.price * Math.abs(Difference_In_Days)).toLocaleString()} VNĐ</p>
                                                 </div>
                                             </div>
                                             <div className="total-payment">
@@ -385,9 +441,7 @@ export default function BookingTicket(props) {
                                         <span style={{ margin: '0 15px', fontSize: '16px' }}>4.5</span>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
                         <div className="comment-evaluate">
                             <div className="comment-item">
@@ -402,7 +456,6 @@ export default function BookingTicket(props) {
                                         <span style={{ margin: '0 15px', fontSize: '16px' }}>4.7</span>
                                     </div>
                                 </div>
-
                             </div>
                             <div className="comment-item">
                                 <div className="tit">
@@ -416,9 +469,7 @@ export default function BookingTicket(props) {
                                         <span style={{ margin: '0 15px', fontSize: '16px' }}>4.8</span>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
                         <div className="comment-evaluate">
                             <div className="comment-item">
@@ -433,7 +484,6 @@ export default function BookingTicket(props) {
                                         <span style={{ margin: '0 15px', fontSize: '16px' }}>4.6</span>
                                     </div>
                                 </div>
-
                             </div>
                             <div className="comment-item">
                                 <div className="tit">
@@ -447,45 +497,81 @@ export default function BookingTicket(props) {
                                         <span style={{ margin: '0 15px', fontSize: '16px' }}>4.6</span>
                                     </div>
                                 </div>
-
-                            </div>
-
-                        </div>
-                        <div className="comment-value">
-                            <div className="row">
-                                {
-                                    comment?.map((item, index) => {
-                                        return (
-                                            <div className="col-6-res" key={index} style={{ height: `${item.content.length > 100 ? '330px' : '220px'}` }}>
-                                                <div className="people-evaluation">
-                                                    <div className="people-i" style={{ backgroundImage: `url(${item.userId.avatar})`, width: '80px', height: '80px', borderRadius: '50%', backgroundPosition: 'center', backgroundSize: 'cover' }}>
-                                                        {/* <img src={item.userId.avatar}></img> */}
-                                                    </div>
-                                                    <div className="address">
-                                                        <h2>{item.userId.name}</h2>
-                                                        <p>{moment(item.userId.created_at).format('DD/MM/YYYY')}</p>
-                                                    </div>
-                                                </div>
-                                                <div className="descr">
-                                                    <p>{item.content}</p>
-                                                    <span><i class="fas fa-heart"></i>Like</span>
-                                                    <span style={{ marginLeft: '40px' }} onClick={() => deleteComment(item._id)}><i class="fas fa-trash-alt"></i>Delete</span>
-                                                    <span style={{ marginLeft: '40px' }} onClick={() => updateComment(item._id)}><i class="fas fa-trash-alt"></i>Update</span>
-                                                </div>
-                                            </div>
-                                        )
-                                    })
-                                }
                             </div>
                         </div>
-                        <div className="btn-add">
-                            <button onClick={() => showEvaluate()}>LEAVE A COMMENT</button>
-                        </div>
-                        {evaluation ? <div className="back_drop"></div> : null}
-                        <Comment show={evaluation} closeModalHandler={closeModalEvaluation} btn={btn} id={props.match.params.id} collect={collect} />
+                        {/* <div className="comment-value">
+                            <div  >
+                               
+                            </div>
+                        </div> */}
                     </div>
+                    <div className="comment-condition">
+                        <h1>Leaving comments if yow want</h1>
+                        <blockquote before="“" lang="en" className="h4 md-h2 center before-content before-green-light " style={{ fontStyle: 'italic' }}><p style={{ fontWeight: '400',  width: '75%', margin: '0 auto', lineHeight: '20px' }} className="text-impressive"> <svg width="45" height={55} className="mb-5 fill-current text-fuchsia-100 " style={{ fill: 'crimson', marginRight: '50px', }}><path d="M13.415.001C6.07 5.185.887 13.681.887 23.041c0 7.632 4.608 12.096 9.936 12.096 5.04 0 8.784-4.032 8.784-8.784 0-4.752-3.312-8.208-7.632-8.208-.864 0-2.016.144-2.304.288.72-4.896 5.328-10.656 9.936-13.536L13.415.001zm24.768 0c-7.2 5.184-12.384 13.68-12.384 23.04 0 7.632 4.608 12.096 9.936 12.096 4.896 0 8.784-4.032 8.784-8.784 0-4.752-3.456-8.208-7.776-8.208-.864 0-1.872.144-2.16.288.72-4.896 5.184-10.656 9.792-13.536L38.183.001z"></path></svg> Absolutely in love with how easy and effective evaluation with <a href="https://twitter.com/surge_sh">your comments</a>&nbsp;is.</p><footer className="md-col-4 mx-auto left-align"><a href="https://twitter.com/fox/status/597723128488398848" className="media color-inherit"><p className="media-body h6 black muted"></p></a></footer></blockquote>
+                        {
+                            comment.length > 3 ? (
+                                <Slider {...settings}>
+                           {
+                              comment?.map((item, index) =>{
+                                   return (
+                                       <div className="col-6-res" key={index} >
+                                           <div className="people-evaluation">
+                                               <div className="people-i" style={{ backgroundImage: `url(${item.userId.avatar})`, width: '80px', height: '80px', borderRadius: '10px', backgroundPosition: 'center', backgroundSize: 'cover' }}>
+                                                 
+                                               </div>
+                                               <div className="address">
+                                                   <h2>- {item.userId.name}</h2>
+                                                   <p>{moment(item.userId.created_at).format('DD/MM/YYYY')}</p>
+                                               </div>
+                                           </div>
+                                           <div className="descr">
+                                               <p>{item.content}</p>
+                                               <span><i class="fas fa-heart"></i>Like</span>
+                                               <span style={{ marginLeft: '40px' }} onClick={() => deleteComment(item._id)}><i class="fas fa-trash-alt"></i>Delete</span>
+                                               <span style={{ marginLeft: '40px' }} onClick={() => updateComment(item._id)}><i class="fas fa-trash-alt"></i>Update</span>
+                                           </div>
+                                       </div>
+                                   )
+                               })
+                           } 
+                            </Slider> 
+                            ):   <div className="slider-show slider-show-add">
+                            <div className="row">
+                                 {
+                              comment?.map((item, index) =>{
+                                   return (
+                                       <div className="col-6-res item-show" key={index} >
+                                           <div className="people-evaluation">
+                                               <div className="people-i" style={{ backgroundImage: `url(${item.userId.avatar})`, width: '80px', height: '80px', borderRadius: '10px', backgroundPosition: 'center', backgroundSize: 'cover' }}>
+                                                 
+                                               </div>
+                                               <div className="address">
+                                                   <h2>- {item.userId.name}</h2>
+                                                   <p>{moment(item.userId.created_at).format('DD/MM/YYYY')}</p>
+                                               </div>
+                                           </div>
+                                           <div className="descr">
+                                               <p>{item.content}</p>
+                                               <span><i class="fas fa-heart"></i>Like</span>
+                                               <span style={{ marginLeft: '40px' }} onClick={() => deleteComment(item._id)}><i class="fas fa-trash-alt"></i>Delete</span>
+                                               <span style={{ marginLeft: '40px' }} onClick={() => updateComment(item._id)}><i class="fas fa-trash-alt"></i>Update</span>
+                                           </div>
+                                       </div>
+                                   )
+                               })
+                           } 
+                            </div>
+                            </div>
+                        } 
+                    </div>
+                    <div className="btn-add">
+                        <button onClick={() => showEvaluate()}>LEAVE A COMMENT</button>
+                    </div>
+                    {evaluation ? <div className="back_drop"></div> : null}
+                    <Comment show={evaluation} closeModalHandler={closeModalEvaluation} btn={btn} id={props.match.params.id} collect={collect} />
+                   
                 </div>
-            </div >
-        </div >
+            </div>
+        </div>
     )
 }

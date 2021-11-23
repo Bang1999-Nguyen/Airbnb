@@ -1,7 +1,8 @@
 .footer{
     height:570px;
-    background-color: #EBEBEB;
+    background-color: white;
     position: relative;
+    border-top:1px solid #ccc;
     .footer__infor{
         width:90%;
         margin:0 auto  0 auto;
@@ -12,7 +13,7 @@
         transform: translate(-50%, -50%);
         .row{
             padding:10px 0;
-            .col-3{
+            .col-sm-3{
                 h1{
                     text-align: left;
                     font-size:14px;
@@ -52,6 +53,15 @@
                     margin-right:30px;
                 }
             }
+        }
+    }
+}
+@media only screen and (min-width:411px) and (max-width:736px){
+    .footer{
+        height:900px;
+        margin-top:-5%;
+        .footer__infor{
+            margin-top:-200px;
         }
     }
 }

@@ -14,33 +14,33 @@ export default function Discover(props) {
     }, []);
     return (
         <div className='discover' >
-            <div className="discover__title" data-aos='fade-up'>
+            <div className="discover__title" data-aos='fade-up' data-aos-once="true">
                 <h1>LIVE ANYWHERE<span></span></h1>
             </div>
-            <div className="discover__content" >
-                <div className="row g-2" data-aos='fade-up'>
-                    <div className="col-3">
+            <div className="discover__content" data-aos='fade-up' data-aos-once="true">
+                <div className="row g-2">
+                    <div className="col-sm-3 col-xs-6">
                         <div className="img__place" style={{ backgroundImage: `url('./images/2f13349d-879d-43c6-83e3-8e5679291d53.jpg')` }}>
                         </div>
                         <div className="title">
                             Outdoor getaways
                         </div>
                     </div>
-                    <div className="col-3" >
+                    <div className="col-sm-3 col-xs-6" >
                         <div className="img__place" style={{ backgroundImage: `url('./images/36f53e61-db8d-403c-9122-5b761c0e4264.jpg')` }}>
                         </div>
                         <div className="title">
                             Unique stays
                         </div>
                     </div>
-                    <div className="col-3">
+                    <div className="col-sm-3 col-xs-6">
                         <div className="img__place" style={{ backgroundImage: `url('./images/7d82ca14-56e5-4465-8218-dcfa7d69b6ac.jpg')` }}>
                         </div>
                         <div className="title">
                             Entire homes
                         </div>
                     </div>
-                    <div className="col-3" >
+                    <div className="col-sm-3 col-xs-6" >
                         <div className="img__place" style={{ backgroundImage: `url('./images/10a638e1-6aff-4313-8033-1275cec83987.jpg')` }}>
                         </div>
                         <div className="title">
@@ -50,12 +50,12 @@ export default function Discover(props) {
                 </div>
             </div>
             <div className="things">
-                <div className="things__title" data-aos="fade-up">
+                <div className="things__title" data-aos="fade-up" data-aos-once="true">
                     <h1>DISCOVER THINGS TO DO<span></span></h1>
                 </div>
-                <div className="event" data-aos="fade-up">
+                <div className="event" data-aos="fade-up" data-aos-once="true">
                     <div className="row">
-                        <div className="col-4" >
+                        <div className="col-sm-4 col-xs-6" >
                             <div className="something" style={{ backgroundImage: `url('./images/istockphoto-1324381802-170667a.jpg')` }} >
                             </div>
                             <div className="mess">
@@ -63,16 +63,16 @@ export default function Discover(props) {
                                 <p>Find unforgettable activities near you.</p>
                             </div>
                         </div>
-                        <div className="col-4" >
-                            <div className="something" style={{ backgroundImage: `url('./images/0ce799cb-7553-4369-be9e-d0011e0ef636.jpg')` }} >
+                        <div className="col-sm-4 col-xs-6" >
+                            <div className="something st-mr" style={{ backgroundImage: `url('./images/0ce799cb-7553-4369-be9e-d0011e0ef636.jpg')` }} >
                             </div>
                             <div className="mess">
                                 <a href="https://www.airbnb.com/s/experiences/online">Online Experiences</a>
                                 <p>Live, interactive activities led by Hosts.</p>
                             </div>
                         </div>
-                        <div className="col-4" >
-                            <div className="something" style={{ backgroundImage: `url('./images/247a1ea3-946d-4eb8-a6ab-e8b9a66846f4.jpg')` }} >
+                        <div className="col-sm-4 col-xs-6" >
+                            <div className="something st-mr-2" style={{ backgroundImage: `url('./images/247a1ea3-946d-4eb8-a6ab-e8b9a66846f4.jpg')` }} >
                             </div>
                             <div className="mess">
                                 <a href="https://www.airbnb.com/s/experiences/online">Featured Collections: Wanderlust</a>
@@ -81,7 +81,7 @@ export default function Discover(props) {
                         </div>
                     </div>
                 </div>
-                <div className="inspiration" data-aos='fade-up'>
+                <div className="inspiration" data-aos='fade-up' data-aos-once="true">
                     <h1>Inspiration for future getaways</h1>
                     <Tabs defaultActiveKey="1" onChange={callback}>
                         <TabPane tab="Destinations for arts & culture" key="1">

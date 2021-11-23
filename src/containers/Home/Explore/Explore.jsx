@@ -24,14 +24,14 @@ export default function Explore() {
             </div>
             <div className="explore__content" >
                 <div className="row">
-                    <div className="col-6">
+                    <div className="col-sm-6 col-xs-12 item-img">
                         <h3>FEATURES STORED</h3>
                         <div className="img__explore" onLoaded={setTimeout(lazyLoad, 4000)}>
                             <img src="./images/Jody-Daunton-Trees-for-Life-1_6 (1).jpg" alt="Hinh 1" className="img" />
                         </div>
                         <h2>THE NATURAL WORLD</h2>
                     </div>
-                    <div className="col-6">
+                    <div className="col-sm-6 col-xs-12 item-img item-img-2">
                         <div className="image__explore" onLoaded={setTimeout(lazyLoad, 4000)}>
                             <img src="./images/Jody-Daunton-Otter-Surfboards-1_2 (1).jpg" alt="Hinh 2" className="img" />
                         </div>
@@ -41,17 +41,17 @@ export default function Explore() {
             </div>
             <div className="explore__place" >
                 <div className="row">
-                    <div className="col-4">
+                    <div className="col-sm-4 col-xs-12">
                         <div className="img__place" onLoaded={setTimeout(lazyLoad, 4000)}>
                             <img src="./images/Justin-Kauffman-Another-Escape-Jacob-Witzling-4 (1).jpg" className="img"></img>
                         </div>
                     </div>
-                    <div className="col-4">
+                    <div className="col-sm-4 col-xs-12">
                         <div className="img__place" onLoaded={setTimeout(lazyLoad, 4000)}>
                             <img src="https://images.unsplash.com/photo-1582966772397-ed68d72f35d1?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGRhJTIwbGF0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" className="img"></img>
                         </div>
                     </div>
-                    <div className="col-4">
+                    <div className="col-sm-4 col-xs-12">
                         <div className="img__place" onLoaded={setTimeout(lazyLoad, 4000)}>
                             <img src="./images/jet-dela-cruz-5QbZIJV8k4E-unsplash.jpg" className="img"></img>
                         </div>

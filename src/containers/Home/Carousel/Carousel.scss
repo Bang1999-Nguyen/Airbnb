@@ -1,5 +1,5 @@
 .carousel{
-    height:560px;
+    height:90vh;
     width:100%;
     background-position: bottom 5% center;
     background-repeat: no-repeat;
@@ -16,5 +16,27 @@
         display:flex;
         justify-content: center;
         align-items: center;
+    }
+}
+@media only screen and (min-width:411px) and (max-width:736px){
+    .carousel{
+        height:50vh;
+        width:100%;
+        background-position: bottom 5% center;
+        background-repeat: no-repeat;
+        background-size:cover;
+        position:relative;
+        .carousel__content{
+            height:300px;
+            width: 90%;
+            margin:0 auto;
+            position: absolute;
+            top:50%;
+            left: 50%;
+            transform: translate(-50%, -40%);
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
 }

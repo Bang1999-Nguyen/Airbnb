@@ -11,6 +11,8 @@ import { css } from 'glamor';
 import ChangeProfile from './ChangeProfile/ChangeProfile';
 import Paginate from './Pagination';
 import moment from 'moment'
+import { actLogin } from '../../components/Modal/module/action';
+import { CHANGE_SUCCESS } from '../../components/Modal/module/types';
 toast.configure({
     toastClassName: css({
         fontSize: '18px !important',
@@ -24,8 +26,6 @@ export default function Profile(props) {
     const { token, currentUser } = useSelector(state => state.authReducer)
     const { Information } = useSelector(state => state.ProfileReducer)
     const [show, setShow] = useState(false)
-    const [modal, setModal] = useState(false)
-    const [form, setForm] = useState('')
     useEffect(() => {
         dispatch(actFetchTickets(currentUser?._id))
         dispatch(actFetchInformation(props.match.params.id))
@@ -57,6 +57,10 @@ export default function Profile(props) {
                     setShow(false)
                 }, 3000);
                 dispatch(actFetchInformation(props.match.params.id))
+              dispatch({
+                  type:CHANGE_SUCCESS,
+                  payload: response
+              })
             }).catch(err => {
                 console.log(err);
             })
@@ -89,47 +93,56 @@ export default function Profile(props) {
                         <div className="image-infor">
                             <div className="circle-1" />
                             <div className="circle-2" />
-                            <div className="img-profile" style={{ backgroundImage: `url(${Information?.avatar})`, width: '120px', height: '120px', borderRadius: '50%', backgroundPosition: 'center', backgroundSize: 'cover' }}></div>
+                            <div className="img-profile" style={{ backgroundImage: `url(${Information?.avatar})`, width: '200px', height: '200px', borderRadius: '50%', backgroundPosition: 'center', backgroundSize: 'cover' }}></div>
                         </div>
                         <div>
                             <button className="edit" onClick={() => setShow(true)}>Change your avatar</button>
-                        </div>
-                        <div>
-                            <button className="editInfor" onClick={() => setModal(true)}>Edit your personal information</button>
                         </div>
                     </div>
                 </div>
                 <div className="profile-detail">
                     <ChangeProfile id={props.match.params.id} />
                 </div>
+                <div className="text-custom">
+                   {/* <h1 className="textCustom"><span>Your</span> Personal Information</h1> */}
+                </div>
             </div>
-
-            <div className="tickets">
-                <h1>HISTORY BOOKING</h1>
+            <div className="tickets" >
+                {/* <h4>Have a nice trip! Enjoy your life</h4>
+                <h5>Travelling around the world</h5> */}
+                <h1 className="stroke_ticket">HISTORY BOOKING</h1>
                 <div className="content-tickets">
                     <div className="row">
-                    {
-                        currentPosts?.map((ticket, index) =>{
-                            return (
-                                <div className="col-4-res" style={{backgroundImage:`url(${ticket.roomId?.image})`}} key={index}>
-                                    <div className="overlay-col-4-res">
-                                        <div className="content-res-4">
-                                            <h3>{ticket.roomId?.name}</h3>
-                                            <p>CHECK-IN: {moment(`${ticket.checkIn}`).format('DD/MM/YYYY')}</p>
-                                            <p>CHECK-OUT: {moment(`${ticket.checkOut}`).format('DD/MM/YYYY')}</p>
-                                            <h4>{ticket.roomId?.price?.toLocaleString()} VNĐ / night</h4>
-                                        </div>
+                        {
+                            currentPosts?.map((ticket, index) => {
+                                return (
+                                    <div className="col-4-res" key={index}>
+                                        <h1>{ticket.roomId?.name}</h1>
+                                        <img src={`${ticket.roomId?.image}`} alt="" />
+                                        <figcaption>
+                                            <h3>
+                                                More Info
+                                            </h3>
+                                            <p>CHECK-IN: {moment(`${ticket.checkIn}`).format('DD/MM/YYYY')} - CHECK-OUT: {moment(`${ticket.checkOut}`).format('DD/MM/YYYY')}</p>
+                                            <p>{ticket.roomId?.price?.toLocaleString()} VNĐ / night</p>
+                                            {/* <p>{ticket.roomId?.description.length > 60 ? ticket.roomId?.description.substr(0,30)+ '...' : ticket.roomId?.description}</p> */}
+                                            <button>
+                                                More Info
+                                            </button>
+                                        </figcaption>
                                     </div>
-                                </div>
-                            )
-                        })
-                    }
+                                )
+                            })
+                        }
                     </div>
                     <div className="pagination">
                         <div className="paginate">
-                        <Paginate postsPerPage={postsPerPage} totalPosts={tickets?.length} style={{ marginTop: '30px' }} paginate={paginate} pageNumber={currentPage} nextPage={nextPage} prevPage={prevPage} />
+                            <Paginate postsPerPage={postsPerPage} totalPosts={tickets?.length} style={{ marginTop: '30px' }} paginate={paginate} pageNumber={currentPage} nextPage={nextPage} prevPage={prevPage} />
                         </div>
                     </div>
+                </div>
+                <div className="text-align">
+
                 </div>
             </div>
             {show ? <div className="back_drop"></div> : null}
@@ -157,13 +170,12 @@ export default function Profile(props) {
                         <p>Change your avatar if you want</p>
                         <div className="img-sed">
                             <input type="file" accept="image/img, image/jpeg, image/gif, image/png" onChange={handleImage} name="avatar"></input>
-
                             <div className="people-i" style={{ backgroundImage: `url(${imgSrc})`, width: '60px', height: '60px', borderRadius: '50%', backgroundPosition: 'center', backgroundSize: 'cover' }}>
                             </div>
                         </div>
                     </div>
                     <button className="rateIs" type="submit" key="submit">Change</button>
-                    <button className="later" onClick={() => setShow(false)} >May be later</button>
+                    <button className="later" onClick={() => setShow(false)}>May be later</button>
                 </Form>
                 <div className="modal-close" onClick={() => setShow(false)}>
                     <svg width="16px" height="16px" viewBox="0 0 16 16" className="icon-close w-1half h-1half absolute pinX-50 pinY-50 translate-50-ul close_icon"><g stroke="none" stroke-width="1" fill="white" fill-rule="evenodd" stroke-linecap="square"><g transform="translate(-1328.000000, -34.000000)" stroke="currentColor"><g transform="translate(1328.000000, 34.000000)"><path d="M1,1 L15,15" id="Line-3"></path> <path d="M1,1 L15,15" id="Line-3" transform="translate(8.000000, 8.000000) scale(-1, 1) rotate(-1.000000) translate(-8.000000, -8.000000) "></path></g></g></g></svg>

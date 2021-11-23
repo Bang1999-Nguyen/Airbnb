@@ -1,9 +1,10 @@
 .profile{
-    height:300vh;
+    height:2000px;
     width:100%;
-    margin-top:6%;
+    margin-top:5%;
     .profile-img{
         height:550px;
+        max-height:550px;
         width:100%;
         background-repeat: no-repeat;
         background-position: center;
@@ -15,7 +16,6 @@
         width:75%;
         border:1px solid blue;
         margin-top:-50px;
-        // z-index:999;
         position: absolute;
         top:65%;
         margin:0 auto;
@@ -103,16 +103,16 @@
 }
 .image-infor {
     position: relative;
-    width: 120px;
-    height: 120px;
+    width: 200px;
+    height: 200px;
   
     .circle-1 {
         position: absolute;
         box-sizing: border-box;
-        width: 128px;
-        height: 128px;
-        top: -4px;
-        left: -2px;
+        width: 220px;
+        height: 220px;
+        top: -10px;
+        left: -10px;
         border-width: 1px;
         border-style: solid;
         border-color:rgb(221, 221, 221) rgb(221, 221, 221) rgb(221, 221, 221) transparent;
@@ -122,10 +122,10 @@
     
     .circle-2 {
         @extend .circle-1;
-        width: 137px;
-        height: 137px;
-        top: -9px;
-        left: -6px;
+        width: 240px;
+        height: 240px;
+        top: -20px;
+        left: -20px;
         border-color:rgb(221, 221, 221) transparent rgb(221, 221, 221) rgb(221, 221, 221);
     }
     
@@ -149,6 +149,11 @@
     }
     
 }
+.profile .ant-picker-input{
+    height:45px!important;
+    margin-top:10px;
+    
+}
 .edit{
 margin:60px 0 20px 0;
 border:none;
@@ -161,15 +166,14 @@ cursor: pointer;
 width:250px;
 }
 .editInfor{
-    margin:0px 0 20px 0;
-
+    margin:6px 0 20px 0;
 background-color: #fff;
 font-size:16px;
 color:black;
 padding:10px 5px;
 border-radius: 5px;
 cursor: pointer;
-width:250px;
+width:290px;
 border:1px solid black;
 }
 .evaluation__wrapProfile{
@@ -291,20 +295,50 @@ border:1px solid black;
 }
 .tickets{
     background-color: transparent;
-    height:660px;
     width:90%;
     margin:0 auto;
-    margin-top:36%;
-    top:110%;
+    margin-top:42%;
+    // top:110%;
     left:50%;
     transform: translate(-50%, -0%);
     position: absolute;
     h1{
-        font-size:25px;
-        color:black;
-        font-weight:500;
+        
         text-align: left;
-        margin-bottom: 20px;
+        margin-bottom: 40px;
+        z-index:999999!important;
+        margin-top:-40px;
+        // position: absolute;
+        // top:-70px;
+        // left:-20px;
+       
+    }
+    h4{
+        writing-mode: vertical-rl;
+        width:300px;
+        max-width:300px;
+        font-size:22px;
+        height:500px;
+        max-height:500px;
+        position: absolute;
+        top:-70%;
+        left:-25%;
+        color:#eee;
+    }
+    h5{
+        writing-mode: vertical-rl;
+        width:300px;
+        max-width:300px;
+        font-size:16px;
+        height:500px;
+        max-height:500px;
+        position: absolute;
+        top:-70%;
+        left:-22%;
+        color:black;
+        font-weight:200;
+        z-index:-8;
+        letter-spacing: 0.05rem;
     }
     .content-tickets{
         height:680px;
@@ -314,32 +348,69 @@ border:1px solid black;
       max-width:100%;
        .row{
         width:100%;
-        height:250px;
+        height:440px;
+      
         .col-4-res{
-            width:32%!important;
+            width:32%;
             box-shadow:0 0 1px 0 rgba(10, 22, 70, 0.06), 0 12px 12px -1px rgba(10, 22, 70, 0.1);
             background-color: #fff!important;
-            border: 1px solid rgb(221, 221, 221);
-            border-radius: 9px;
+            border: 1px solid rgb(170, 169, 169);
+            border-radius: 10px;
             margin-bottom: 15px;
           margin-left:10px;
            padding:10px 30px;
-           height:250px;
+           height:300px;
            background-position: center;
            background-size: cover;
            background-repeat: no-repeat;
            position: relative;
            overflow: hidden;
+         cursor: pointer;
+         transition: all 2s ease-in-out;
+      
+         &:hover{
+            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+            img{
+                transform: scale(1.15);
+            }
+            figcaption {
+                bottom:0
+            }
+        }
+        img{
+            width:100%;
+            height:440px;
+            position:absolute;
+            top:0;
+            left:0;
+            bottom:0;
+            right:0;
+            transition: all 0.5s ease-in-out;
+        }
+       }
+           h1{
+            position: absolute;
+            top: 30px;
+            left: 20px;
+            margin: 0;
+            padding: 0;
+            color: white;
+            font-size: 20px;
+            font-weight: 200;
+            line-height: 1;
+            font-family: 'Roboto', sans-serif;
+            z-index:4;
+           }
         }
        }
     }
-}
+
 .overlay-col-4-res{
     position: absolute;
     top:0;
     left:0;
     bottom:0;
-    height:250px;
+    height:667px;
     width:100%;
     background-color: rgba(230,43,74,.75);
     border-radius: 9px;
@@ -384,7 +455,7 @@ border:1px solid black;
 .pagination{
     height:60px;
     width: 97%;
-    margin-top:300px;
+    margin-top:250px;
     position: relative;
     .paginate{
         display:flex;
@@ -407,3 +478,135 @@ border:1px solid black;
         font-size:15px;
     }
 }
+figcaption {
+		position: absolute;
+		bottom: -45%;
+		left: 0;
+		width: 100%;
+		//height: 50%;
+		margin: 0;
+		padding: 30px;
+		background-color: rgba(black,0.75);
+		box-shadow: 0 0 20px rgba(black,0.4);
+		color: white;
+		line-height: 1;
+		transition: 0.25s;
+		h3 {
+			margin: 0 0 20px;
+			padding: 0;
+            color:white;
+            font-size:18px;
+            text-align: left;
+            
+		}
+		p {
+			font-size: 14px;
+			line-height: 1.75;
+            text-align: left;
+		}
+		button {
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 10px 0 0;
+			padding: 10px 30px;
+			background-color:crimson;
+			border: none;
+			border-radius: 5px;
+			color: white;
+			font-size: 14px;
+		}
+	}
+    .text-custom{
+        position: absolute;
+        right:-9%;
+        top:21%;
+       h1{
+            writing-mode: vertical-rl;
+            font-weight:bold;
+            letter-spacing: 0.05rem;
+            font-size:30px;
+        }
+        span{
+            color:crimson
+        }
+    }
+    .stroke_ticket {
+        -webkit-text-stroke-width: 1.5px;
+        -moz-text-stroke-width: 1.5px;
+        -webkit-text-stroke-color: crimson;
+        -moz-text-stroke-color: crimson;
+        color: transparent;
+        background-color: none;
+        font-weight:bold;
+        
+        font-size:35px;
+        letter-spacing: 0.05rem;
+      }
+      @media only screen and (min-width:768px) and (max-width:1024px){
+        .profile-content{
+            height:670px;
+            width:93%!important;
+            border:1px solid blue;
+            margin-top:-50px;
+            position: absolute;
+            top:65%;
+            margin:0 auto;
+            left:40%;
+            right:10%;
+            box-shadow:0 0 1px 0 rgba(10, 22, 70, 0.06), 0 12px 12px -1px rgba(10, 22, 70, 0.1);
+            background-color: #fff!important;
+            border: 1px solid rgb(221, 221, 221);
+            transform: translate(-50%, -0%);
+            border-radius: 10px ;}
+            .tickets{
+                margin-top:72%!important;
+            }
+            .profile{
+                height:2270px!important
+            }
+            .col-4-res{
+                width:47%!important;
+                box-shadow:0 0 1px 0 rgba(10, 22, 70, 0.06), 0 12px 12px -1px rgba(10, 22, 70, 0.1);
+                background-color: #fff!important;
+                border: 1px solid rgb(170, 169, 169);
+                border-radius: 10px;
+                margin-bottom: 15px;
+              margin-left:15px!important;
+               padding:10px 30px;
+               height:300px;
+               background-position: center;
+               background-size: cover;
+               background-repeat: no-repeat;
+               position: relative;
+               overflow: hidden;
+             cursor: pointer;
+             transition: all 2s ease-in-out;
+          
+             &:hover{
+                box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+                img{
+                    transform: scale(1.15);
+                }
+                figcaption {
+                    bottom:0
+                }
+            }
+        }
+        .pagination{
+            height:60px;
+            width: 97%;
+            margin-top:530px;
+            position: relative;
+            .paginate{
+                display:flex;
+                justify-content: flex-end;
+                align-items: center;
+                position: absolute;
+                right:0;
+            }  
+        }
+            
+      }
+    

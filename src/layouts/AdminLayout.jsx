@@ -9,6 +9,7 @@ import { Link, } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { actFetchInformation } from '../containers/Profile/module/action';
 import withLayout from '../hocs/withLayout';
+import { Redirect } from 'react-router-dom';
  function AdminLayout(props) {
     const dispatch = useDispatch()
     const { Information } = useSelector(state => state.ProfileReducer)
@@ -16,8 +17,8 @@ import withLayout from '../hocs/withLayout';
     useEffect(() => {
         dispatch(actFetchInformation(currentUser._id))
     }, [])
-  
-    return (
+
+    return currentUser.type === 'ADMIN' ?(
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-transparent py-3">
                 <div className="container-fluid">
@@ -64,6 +65,8 @@ import withLayout from '../hocs/withLayout';
                 </div>
             </div>
         </div>
-    )
+    ) : (
+        <Redirect to="/" />
+      );
 }
 export default withLayout(AdminLayout)

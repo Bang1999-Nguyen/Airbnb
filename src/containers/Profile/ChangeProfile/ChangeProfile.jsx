@@ -65,9 +65,7 @@ export default function ChangeProfile({ id }) {
     }
     const handleChangeDate = (values) => {
         formik.setFieldValue('birthday', moment(values).format())
-      
     }
-    
     const onFormLayoutChange = ({ size }) => {
         setComponentSize(size);
     }
@@ -107,13 +105,13 @@ export default function ChangeProfile({ id }) {
                 </div>
                 <div className="profile-name">
                 <i class="fas fa-genderless"></i>
-                    <Checkbox.Group options={options} style={{marginTop:'20px', marginLeft:'-250px', fontSize:'16px'}} onChange={onChange} value={[`${formik.values.gender ? "Male" : "Female"}`]}/>
+                    <Checkbox.Group options={options} style={{marginTop:'20px',  fontSize:'16px'}} onChange={onChange} value={[`${formik.values.gender ? "Male" : "Female"}`]} className="gender-selection"/>
                 </div>
                 <div className="profile-name">
                     <i class="fas fa-map-marker-alt"></i>
                     <Input name='address' placeholder='Your address' className="name" value={formik.values.address} onChange={formik.handleChange} />
                 </div>
-                <button className="changing" type="submit"  key="submit">Change</button>
+                <button className="editInfor" type="submit"  key="submit">Change your personal information</button>
             </Form> 
         </div>
     )

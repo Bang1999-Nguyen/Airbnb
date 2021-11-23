@@ -1,1 +1,2 @@
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
+export const CHANGE_SUCCESS = "CHANGE_SUCCESS"

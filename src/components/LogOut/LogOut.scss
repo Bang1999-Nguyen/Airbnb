@@ -1,0 +1,135 @@
+.popup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    width:100%;
+    height: 100vh;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1!important;
+    // visibility: hidden;
+    overflow: hidden;
+    transition: 0.64s ease-in-out;
+   
+  }
+  .popup-inner {
+    // position: relative;
+    // bottom: -100vw;
+    // right: -100vh;
+    // display: flex;
+    // align-items: center;
+   
+    width:60%;
+    height:80vh;
+    background-color: #fff;
+   z-index:888!important;
+    transition: 0.64s ease-in-out;
+    position: fixed;
+      top:10%;
+      left:19%;
+      transform: translate(0%, -0%);
+    display:flex;
+    justify-content: center;
+  }
+  .prop-text img{
+      height:250px;
+      width:330px;
+      border-radius: 10px;
+  }
+  .popup__photo {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 40%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .popup__photo img {
+    width: auto;
+    height: 100%;
+  }
+  .popup__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 60%;
+    height: 100%;
+    padding: 4rem;
+  }
+  .prop-text{
+      width: 60%;
+      height:100%;
+  }
+  .prop-text h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    color: #0A0A0A;
+    margin-top:20px;
+  }
+  .btn-out button{
+      padding:10px 30px;
+      background-color: crimson;
+      border:none;
+      margin-right:20px;
+      color:white;
+      margin-top:40px;
+      font-size:18px;
+border-radius: 4px;
+font-weight:500;
+cursor: pointer;
+animation: downText 3s infinite;
+
+  }
+  .btn-out .btn-later{
+      background-color: #fff;
+      color:black;
+      border:1px solid black;
+      animation: downText 3s infinite!important;
+  }
+  .popup__text p {
+    font-size: 0.875rem;
+    color: #686868;
+    line-height: 1.5;
+  }
+  .popup:target {
+    visibility: visible;
+    opacity: 1;
+  }
+  .popup:target .popup-inner {
+    bottom: 0;
+    right: 0;
+    transform: rotate(0);
+  }
+  .popup__close {
+    position: absolute;
+    right: -1rem;
+    top: -1rem;
+    width: 3rem;
+    height: 3rem;
+    font-size: 0.875rem;
+    font-weight: 300;
+    border-radius: 100%;
+    background-color: #0A0A0A;
+    z-index: 4;
+    color: #fff;
+    line-height: 3rem;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  @keyframes downText{
+    0% {
+        transform: translateY(-5
+    px
+    );
+    }
+    100% {
+        transform: translateY(5
+    px
+    );
+    }
+  }

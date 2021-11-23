@@ -1,4 +1,4 @@
-import { ADD__ADULT, ADD__TRANSITION, CHECK__CALENDAR, CLEAR__RESULT, CLICK__ACTION, FETCH_LOCATION_FAIL, FETCH_LOCATION_REQUEST, FETCH_LOCATION_SUCCESS, FIND__LOCATION, HIDE__OVERLAY, IS__PLACE, SELECT__ACTION, SELECT__LOCATION, VALUE__SELECTION } from "./types";
+import { ADD__ADULT, ADD__TRANSITION, CHECK__CALENDAR, CLEAR__RESULT, CLICK__ACTION, FETCH_LOCATION_FAIL, FETCH_LOCATION_REQUEST, FETCH_LOCATION_SUCCESS, FIND__LOCATION, HIDE__OVERLAY, IS_LOGOUT, IS__PLACE, SELECT__ACTION, SELECT__LOCATION, VALUE__SELECTION } from "./types";
 
 const initialState = {
   toStay: true,
@@ -91,7 +91,12 @@ const CarouselReducer = (state = initialState, { type, payload }) => {
     }
     case CLEAR__RESULT: {
       state.currentTotalPeople = state.totalPeople;
-      state.totalPeopleDefault = state.totalPeople
+      state.totalPeopleDefault = state.totalPeople;
+      state.quantityPeople[0].quantity = 0;
+      state.quantityPeople[1].quantity = 0;
+      state.quantityPeople[2].quantity = 0;
+      state.StartDate = '';
+      state.EndDate = '';
       return { ...state, totalPeople: '', infants: '' };
     }
     case IS__PLACE: {
@@ -99,6 +104,17 @@ const CarouselReducer = (state = initialState, { type, payload }) => {
     }
     case CHECK__CALENDAR: {
       return { ...state, StartDate: payload.time, EndDate: payload.end };
+    }
+    case IS_LOGOUT:{
+      state.currentTotalPeople = state.totalPeople;
+      state.totalPeopleDefault = state.totalPeople;
+      state.quantityPeople[0].quantity = 0;
+      state.quantityPeople[1].quantity = 0;
+      state.quantityPeople[2].quantity = 0;
+      state.StartDate = '';
+      state.EndDate = '';
+      return { ...state, totalPeople: '', infants: '' };
+
     }
     case 'REMEMBER__LOCATION': {
       return { ...state, currentPlace: payload };

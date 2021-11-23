@@ -83,10 +83,11 @@ export default function SignUp({ register, handleSignUp, back, backToSignIn, clo
         <div>
             <div className="register" style={{
                 opacity: register ? '0' : '1',
-                transform: register ? "translateY(-150vh)" : 'translateY(10%)'
+                // transform: register ? "translateY(-150vh)" : 'translateY(10%)'
+                transform:  register ? 'translateY(-150vh) rotate(32deg)' : 'translateY(10%) rotate(0)',
             }}>
                 <div className="row">
-                    <div className="col-5" style={{ backgroundImage: 'url("./images/rstumpf_6756.jpg")' }}>
+                    <div className="col-5" style={{ backgroundImage: 'url("https://s3.anotherescape.com/_390xAUTO_crop_center-center_none/PB280982-small-1.jpg?mtime=20200407213215&focal=none&tmtime=20200407213449")' }}>
                     </div>
                     <div className="col-7">
                         <div className="signUp__title">

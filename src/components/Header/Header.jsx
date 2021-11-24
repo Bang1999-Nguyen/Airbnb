@@ -38,7 +38,6 @@ export default function Header(props) {
         setRegister(true)
     }
     const [isTransform, setIsTransform] = useState(false)
-    // const userSignIn = JSON.parse(localStorage.getItem(USER_LOGIN))
     const userSignIn = (localStorage.getItem(USER_LOGIN_AIRBNB))
     const [logOut, setLogOut] = useState(false)
     const chooseOption = (button) => {
@@ -178,6 +177,7 @@ export default function Header(props) {
         document.querySelector('.menu_select').style.display = 'block';
         document.querySelector('.menu_select').style.transform = 'scale(0)';
     }
+    const IsUser = localStorage.getItem(USER_LOGIN_AIRBNB)
     return location && (
         <div>
             <div className={`header ${isVisible ? 'active' : ''} ${isHighlight ? 'isHeader' : ''}`} >
@@ -285,7 +285,9 @@ export default function Header(props) {
                                         <div className="logOut" onClick={() => logout()}><a to="/">Log out</a></div>
                                         <div className="list-item" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                             <div><NavLink to="/admin/location" style={{ textDecoration: 'underline', fontSize: '16px' }}>Admin</NavLink></div>
-                                            <div><NavLink to={`/profile/${currentUser._id}`} style={{ marginLeft: '15px', textDecoration: 'underline', fontSize: '16px' }} onClick={() => setModal(false)}>Profile</NavLink></div>
+                                            {
+                                                IsUser ? <div><NavLink to={`/profile/${currentUser._id}`} style={{ marginLeft: '15px', textDecoration: 'underline', fontSize: '16px' }} onClick={() => setModal(false)}>Profile</NavLink></div> : ''  
+                                            }
                                             <div>
                                                 <NavLink to="/" style={{ marginLeft: '15px', textDecoration: 'underline', fontSize: '16px' }} >Home</NavLink></div>
                                         </div>

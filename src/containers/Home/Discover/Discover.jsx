@@ -161,19 +161,384 @@ export default function Discover(props) {
                             </div>
                         </TabPane>
                         <TabPane tab="Destinations for outdoor adventure" key="2">
-                            Content of Tab Pane 2
+                        <div className="row">
+                                <div className="col-3">
+                                    <div className="contact__destination">
+                                        <h3>Phoenix</h3>
+                                        <p>Arizona</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>San Francisco</h3>
+                                        <p>California</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Dublin</h3>
+                                        <p>Ireland</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                </div>
+                                <div className="col-3">
+                                    <div className="contact__destination">
+                                        <h3>Hot Springs</h3>
+                                        <p>Arkansas</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Barcelona</h3>
+                                        <p>Catalonia</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Florence</h3>
+                                        <p>Italy</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Liverpool</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                </div>
+                                <div className="col-3">
+                                <div className="contact__destination">
+                                        <h3>Los Angeles</h3>
+                                        <p>California</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Prague</h3>
+                                        <p>Czechia</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Rome</h3>
+                                        <p>Italy</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>St lves</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                </div>
+                                <div className="col-3">
+                                <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                </div>
+                            </div>
                         </TabPane>
                         <TabPane tab="Mountain cabins" key="3">
-                            Content of Tab Pane 3
+                        <div className="row">
+                                <div className="col-3">
+                                    <div className="contact__destination">
+                                        <h3>Phoenix</h3>
+                                        <p>Arizona</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>San Francisco</h3>
+                                        <p>California</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Dublin</h3>
+                                        <p>Ireland</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                </div>
+                                <div className="col-3">
+                                    <div className="contact__destination">
+                                        <h3>Hot Springs</h3>
+                                        <p>Arkansas</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Barcelona</h3>
+                                        <p>Catalonia</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Florence</h3>
+                                        <p>Italy</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Liverpool</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                </div>
+                                <div className="col-3">
+                                <div className="contact__destination">
+                                        <h3>Los Angeles</h3>
+                                        <p>California</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Prague</h3>
+                                        <p>Czechia</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Rome</h3>
+                                        <p>Italy</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>St lves</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                </div>
+                                <div className="col-3">
+                                <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                </div>
+                            </div>
                         </TabPane>
                         <TabPane tab="Beach destinations" key="4">
-                            Content of Tab Pane 4
+                        <div className="row">
+                                <div className="col-3">
+                                    <div className="contact__destination">
+                                        <h3>Phoenix</h3>
+                                        <p>Arizona</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>San Francisco</h3>
+                                        <p>California</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Dublin</h3>
+                                        <p>Ireland</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                </div>
+                                <div className="col-3">
+                                    <div className="contact__destination">
+                                        <h3>Hot Springs</h3>
+                                        <p>Arkansas</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Barcelona</h3>
+                                        <p>Catalonia</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Florence</h3>
+                                        <p>Italy</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Liverpool</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                </div>
+                                <div className="col-3">
+                                <div className="contact__destination">
+                                        <h3>Los Angeles</h3>
+                                        <p>California</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Prague</h3>
+                                        <p>Czechia</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Rome</h3>
+                                        <p>Italy</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>St lves</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                </div>
+                                <div className="col-3">
+                                <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                </div>
+                            </div>
                         </TabPane>
                         <TabPane tab="Popular destinations" key="5">
-                            Content of Tab Pane 5
+                        <div className="row">
+                                <div className="col-3">
+                                    <div className="contact__destination">
+                                        <h3>Phoenix</h3>
+                                        <p>Arizona</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>San Francisco</h3>
+                                        <p>California</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Dublin</h3>
+                                        <p>Ireland</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                </div>
+                                <div className="col-3">
+                                    <div className="contact__destination">
+                                        <h3>Hot Springs</h3>
+                                        <p>Arkansas</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Barcelona</h3>
+                                        <p>Catalonia</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Florence</h3>
+                                        <p>Italy</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Liverpool</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                </div>
+                                <div className="col-3">
+                                <div className="contact__destination">
+                                        <h3>Los Angeles</h3>
+                                        <p>California</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Prague</h3>
+                                        <p>Czechia</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Rome</h3>
+                                        <p>Italy</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>St lves</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                </div>
+                                <div className="col-3">
+                                <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                </div>
+                            </div>
                         </TabPane>
                         <TabPane tab="Unique stays" key="6">
-                            Content of Tab Pane 6
+                        <div className="row">
+                                <div className="col-3">
+                                    <div className="contact__destination">
+                                        <h3>Phoenix</h3>
+                                        <p>Arizona</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>San Francisco</h3>
+                                        <p>California</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Dublin</h3>
+                                        <p>Ireland</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                </div>
+                                <div className="col-3">
+                                    <div className="contact__destination">
+                                        <h3>Hot Springs</h3>
+                                        <p>Arkansas</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Barcelona</h3>
+                                        <p>Catalonia</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Florence</h3>
+                                        <p>Italy</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Liverpool</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                </div>
+                                <div className="col-3">
+                                <div className="contact__destination">
+                                        <h3>Los Angeles</h3>
+                                        <p>California</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Prague</h3>
+                                        <p>Czechia</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Rome</h3>
+                                        <p>Italy</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>St lves</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                </div>
+                                <div className="col-3">
+                                <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                    <div className="contact__destination">
+                                        <h3>Edinburgh</h3>
+                                        <p>United Kingdom</p>
+                                    </div>
+                                </div>
+                            </div>
                         </TabPane>
                     </Tabs>
                 </div>

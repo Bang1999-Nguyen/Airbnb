@@ -183,7 +183,7 @@ export default function BookingTicket(props) {
                                     setModal(false)
                                 }, 800)}><i class="fas fa-chevron-left"></i>Close</p>
                                 <span>
-                                    <NavLink to={`/profile/${currentUser._id}`} className="go_to">Go to your profile</NavLink>
+                                    <NavLink to={`/profile/${currentUser._id}`} className="go_to" onClick={() => window.scrollTo(0,0)}>Go to your profile</NavLink>
                                     <i class="fas fa-chevron-right"></i>
                                 </span>
                             </div>

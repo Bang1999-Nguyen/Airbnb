@@ -15,11 +15,10 @@ import { actFetchDetail, actMoreDetail, getCurrentDate, getCurrentLocation, getG
 export default function Header(props) {
     const history = useHistory();
     const { isDisplay, location, locationDefault, quantityPeople, currentTotalPeople, totalPeople,
-        infants, btnSelection,  StartDate, EndDate,  } = useSelector(state => state.CarouselReducer)
-        
-        const {guest, locationCurrent, startOfDate, endOfDate, } = useSelector(state => state.DetailReducer)
+        infants, btnSelection,  StartDate, EndDate,  } = useSelector(state => state.CarouselReducer) 
+    const {guest, locationCurrent, startOfDate, endOfDate, } = useSelector(state => state.DetailReducer)
     const [isVisible, setIsVisible] = useState(false)
-      const userSignIn =(localStorage.getItem(USER_LOGIN_AIRBNB))
+    const userSignIn =(localStorage.getItem(USER_LOGIN_AIRBNB))
     const [isLocation, setLocation] = useState(false)
     const [isQuantity, setIsQuantity] = useState(false)
     const [isExperience, setIsExperience] = useState(false)
@@ -157,6 +156,7 @@ export default function Header(props) {
         setIsQuantity(true)
         dispatch(hideOverlay())
     }
+    const IsUser = localStorage.getItem(USER_LOGIN_AIRBNB)
     return location && (
         <div>
             <div className={`header ${isVisible ? 'active' : ''} ${isHighlight ? 'isHeader' : ''} headerSec`} style={{ position: 'fixed', zIndex: "1000000000!important" }}>
@@ -255,7 +255,9 @@ export default function Header(props) {
                                         <div className="logOut" onClick={() => logout()}><a to="/">Log out</a></div>
                                         <div className="list-item" style={{display:'flex',justifyContent:'center', alignItems:'center'}}>
                                         <div><NavLink to="/admin/location" style={{textDecoration:'underline', fontSize:'16px'}}>Admin</NavLink></div>
-                                           <div><NavLink to={`/profile/${currentUser._id}`} style={{marginLeft:'15px', textDecoration:'underline', fontSize:'16px'}} onClick={() => setModal(false)}>Profile</NavLink></div>
+                                        {
+                                                IsUser ? <div><NavLink to={`/profile/${currentUser._id}`} style={{ marginLeft: '15px', textDecoration: 'underline', fontSize: '16px' }} onClick={() => setModal(false)}>Profile</NavLink></div> : ''  
+                                            }
                                            <div>
                                            <NavLink to="/" style={{marginLeft:'15px', textDecoration:'underline', fontSize:'16px'}} >Home</NavLink></div>
                                         </div>

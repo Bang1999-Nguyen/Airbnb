@@ -10,9 +10,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { css } from 'glamor';
 import ChangeProfile from './ChangeProfile/ChangeProfile';
 import Paginate from './Pagination';
+import { Redirect } from 'react-router-dom';
 import moment from 'moment'
-import { actLogin } from '../../components/Modal/module/action';
 import { CHANGE_SUCCESS } from '../../components/Modal/module/types';
+import { USER_LOGIN_AIRBNB } from '../../settings/apiConfig';
+import Modal from '../../components/Modal/Modal';
 toast.configure({
     toastClassName: css({
         fontSize: '18px !important',
@@ -30,9 +32,10 @@ export default function Profile(props) {
         dispatch(actFetchTickets(currentUser?._id))
         dispatch(actFetchInformation(props.match.params.id))
     }, [show])
+    const IsUser = localStorage.getItem(USER_LOGIN_AIRBNB)
     const { tickets } = useSelector(state => state.ProfileReducer)
     const [currentPage, setCurrentPage] = useState(1)
-    const [postsPerPage, setPostsPerPage] = useState(6)
+    const [postsPerPage] = useState(6)
     // get current posts
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -69,8 +72,14 @@ export default function Profile(props) {
     const onFormLayoutChange = ({ size }) => {
         setComponentSize(size);
     }
+   
     const [componentSize, setComponentSize] = useState('default');
     const [imgSrc, setImgSrc] = useState(null)
+    const [showModal, setShowModal] = useState(false)
+    const  goPrevious = () =>{
+      
+        setShowModal(true)
+    }
     const handleImage = (e) => {
         let file = e.target.files[0]
         if (file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/gif' || file.type === 'image/img') {
@@ -83,7 +92,7 @@ export default function Profile(props) {
             formik.setFieldValue('avatar', file)
         }
     }
-    return (
+    return IsUser ? (
         <div className="profile">
             <div className="profile-img" >
             </div>
@@ -104,12 +113,10 @@ export default function Profile(props) {
                     <ChangeProfile id={props.match.params.id} />
                 </div>
                 <div className="text-custom">
-                   {/* <h1 className="textCustom"><span>Your</span> Personal Information</h1> */}
                 </div>
             </div>
+            {showModal ? alert('1') : ''}
             <div className="tickets" >
-                {/* <h4>Have a nice trip! Enjoy your life</h4>
-                <h5>Travelling around the world</h5> */}
                 <h1 className="stroke_ticket">HISTORY BOOKING</h1>
                 <div className="content-tickets">
                     <div className="row">
@@ -125,7 +132,6 @@ export default function Profile(props) {
                                             </h3>
                                             <p>CHECK-IN: {moment(`${ticket.checkIn}`).format('DD/MM/YYYY')} - CHECK-OUT: {moment(`${ticket.checkOut}`).format('DD/MM/YYYY')}</p>
                                             <p>{ticket.roomId?.price?.toLocaleString()} VNĐ / night</p>
-                                            {/* <p>{ticket.roomId?.description.length > 60 ? ticket.roomId?.description.substr(0,30)+ '...' : ticket.roomId?.description}</p> */}
                                             <button>
                                                 More Info
                                             </button>
@@ -182,5 +188,8 @@ export default function Profile(props) {
                 </div>
             </div>
         </div >
-    )
+    ) : (
+        <Redirect to="/" />
+       
+      );
 }

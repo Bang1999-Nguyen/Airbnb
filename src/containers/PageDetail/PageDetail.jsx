@@ -105,8 +105,6 @@ export default function PageDetail(props) {
                             })
                         }
                         </div>
-                       
-
                     </div>
                     {show ? <div className="back_drop"></div> : null}
                     <Modal show={show} closeModalHandler={closeModalHandler} />

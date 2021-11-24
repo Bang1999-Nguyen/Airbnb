@@ -43,7 +43,7 @@ export default function Explore() {
                 <div className="row">
                     <div className="col-sm-4 col-xs-12">
                         <div className="img__place" onLoaded={setTimeout(lazyLoad, 4000)}>
-                            <img src="./images/Justin-Kauffman-Another-Escape-Jacob-Witzling-4 (1).jpg" className="img"></img>
+                            <img src="./images/Justin-Kauffman-Another-Escape-Jacob-Witzling-4 (1).jpg" className="img" alt="Hình 3"></img>
                         </div>
                     </div>
                     <div className="col-sm-4 col-xs-12">
@@ -53,7 +53,7 @@ export default function Explore() {
                     </div>
                     <div className="col-sm-4 col-xs-12">
                         <div className="img__place" onLoaded={setTimeout(lazyLoad, 4000)}>
-                            <img src="./images/jet-dela-cruz-5QbZIJV8k4E-unsplash.jpg" className="img"></img>
+                            <img src="./images/jet-dela-cruz-5QbZIJV8k4E-unsplash.jpg" className="img" alt="Hình 4"></img>
                         </div>
                     </div>
                 </div>

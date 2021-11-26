@@ -141,7 +141,7 @@ export default function Room({ create, closeCreate, id }) {
                         <Switch onChange={handleSwitch('cableTV')} name="cableTV" />
                     </div>
                 </div>
-                <button className="rateIs" type="submit" key="submit">Change</button>
+                <button className="rateIs" type="submit" key="submit">Create</button>
             </Form>
             <div className="modal-close" onClick={closeCreate}>
                 <svg width="16px" height="16px" viewBox="0 0 16 16" className="icon-close w-1half h-1half absolute pinX-50 pinY-50 translate-50-ul close_icon"><g stroke="none" stroke-width="1" fill="white" fill-rule="evenodd" stroke-linecap="square"><g transform="translate(-1328.000000, -34.000000)" stroke="currentColor"><g transform="translate(1328.000000, 34.000000)"><path d="M1,1 L15,15" id="Line-3"></path> <path d="M1,1 L15,15" id="Line-3" transform="translate(8.000000, 8.000000) scale(-1, 1) rotate(-1.000000) translate(-8.000000, -8.000000) "></path></g></g></g></svg>

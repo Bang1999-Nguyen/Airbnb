@@ -19,7 +19,9 @@ const UserAdminReducer = (state = initialState, { type, payload }) => {
 
     case FETCH_USER_FAIL:
       return { ...state, error: payload, loading: false };
-    
+    case 'CUSTOM_USER':{
+      return { ...state,  listUser: payload };
+    }
     default:
       return state;
   }

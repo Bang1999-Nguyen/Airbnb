@@ -258,6 +258,9 @@ border:1px solid black;
       z-index: 1;
       background-color: rgba(31,32,41,.75);
 }
+.profile-custom{
+    display:none
+}
 .back_dropProfile{
     position: fixed;
     margin: 0 auto;
@@ -608,5 +611,172 @@ figcaption {
             }  
         }
             
+      }
+      @media only screen and (min-width:411px) and (max-width:736px){
+        .profile-content{
+            height:450px!important;
+            width:99%!important;
+         
+            margin-top:-50px;
+            position: absolute;
+            top:65%;
+            margin:0 auto;
+            left:40%;
+            right:10%;
+            box-shadow:0 0 1px 0 rgba(10, 22, 70, 0.06), 0 12px 12px -1px rgba(10, 22, 70, 0.1);
+            background-color: #fff!important;
+            border: 1px solid rgb(221, 221, 221);
+            transform: translate(-50%, -0%);
+            border:1px solid yellow;
+            border-radius: 10px ;}
+            .tickets{
+                margin-top:-10%!important;
+                
+            }
+            .profile{
+                height:3670px!important
+            }
+            .col-4-res{
+                width:90%!important;
+                box-shadow:0 0 1px 0 rgba(10, 22, 70, 0.06), 0 12px 12px -1px rgba(10, 22, 70, 0.1);
+                background-color: #fff!important;
+                border: 1px solid rgb(170, 169, 169);
+                border-radius: 10px;
+                margin-bottom: 15px;
+              margin-left:15px!important;
+               padding:10px 30px;
+               height:300px;
+               background-position: center;
+               background-size: cover;
+               background-repeat: no-repeat;
+               position: relative;
+               overflow: hidden;
+             cursor: pointer;
+             transition: all 2s ease-in-out;
+          
+             &:hover{
+                box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+                img{
+                    transform: scale(1.15);
+                }
+                figcaption {
+                    bottom:0
+                }
+            }
+        }
+        .pagination{
+            height:60px;
+            width: 97%;
+            margin-top:1500px;
+            position: relative;
+            .paginate{
+                display:flex;
+                justify-content: flex-end;
+                align-items: center;
+                position: absolute;
+                right:0;
+            }  
+        }
+        .profile-content{
+            height:450px;
+            width:90%;
+          
+            margin-top:-50px;
+            position: absolute;
+            top:65%;
+            margin:0 auto;
+            left:50%;
+            box-shadow:0 0 1px 0 rgba(10, 22, 70, 0.06), 0 12px 12px -1px rgba(10, 22, 70, 0.1);
+            background-color: #fff!important;
+            border: 1px solid rgb(221, 221, 221);
+            transform: translate(-50%, -0%);
+            border-radius: 10px ;
+            
+          
+            .profile-information{
+                width:100%!important;
+                height:450px!important;
+               background-color: crimson;
+               position: absolute;
+               top:-1px;
+               border-radius: 10px 0 0 10px;
+                        .image-profile{
+                            height:400px;
+                            width: 90%;
+                            margin:40px auto;
+                            display:flex;
+                            justify-content: center;
+                            align-items: center;
+                            flex-direction: column;
+                            .circle-img{
+                                    width:100px;
+                                    height:100px;
+                                    background-size: cover;
+                                    background-position: center;
+                                    background-repeat: no-repeat;
+                                    border-radius: 50%;
+                            }
+                        }
+            }
+            .profile-detail{
+                width:100%;
+                height:480px;
+                position: absolute;
+                top:0;
+                right:0;
+                display:none;
+               
+                .profile-view{
+                    height:480px;
+                    width:100%;
+                   padding:50px 20px;
+                   margin:0 auto;
+                   display:flex;
+                 justify-content: center;
+                 flex-direction: column;
+                   .profile-name{
+                       height:60px;
+                       width: 100%;
+                       background-color: white;
+                       box-shadow:0 0 1px 0 rgba(10, 22, 70, 0.06), 0 12px 12px -1px rgba(10, 22, 70, 0.1);
+                       border: 1px solid rgb(221, 221, 221);
+            border-radius: 10px ;
+            margin-bottom: 18px;
+            transition:all 0.5s ease-in-out;
+            cursor: pointer;
+                       i{
+                           line-height:60px;
+                           font-size:25px;
+                            color:rgba(183, 157, 230, 0.555);
+                           text-align: left;
+                           float:left;
+                           margin-left:30px;
+                           width:14%;
+                       }
+                       h1{
+                           float:left;
+                           font-size:18px;
+                           font-weight:400;
+                           line-height:60px;
+                           text-align: left;
+                        //    margin-left:30px;
+                       }
+                       &:hover{
+                           transform: scale(1.1);
+                       }
+                    }
+                }
+            }
+        }
+        .profile-custom{
+            display:block;
+          
+            height:700px;
+            width:90%;
+           
+            margin: 340px auto 0 auto
+        }
+          
+          
       }
     

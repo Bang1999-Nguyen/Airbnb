@@ -32,7 +32,9 @@ const initialState = {
   StartDate: '',
   EndDate: '',
   currentTotalPeople: '',
-  totalPeopleDefault: ''
+  totalPeopleDefault: '',
+  FirstDay:'',
+  LastDay:''
 }
 const CarouselReducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -118,6 +120,15 @@ const CarouselReducer = (state = initialState, { type, payload }) => {
     }
     case 'REMEMBER__LOCATION': {
       return { ...state, currentPlace: payload };
+    }
+    case 'START_DATE':{
+      return { ...state, FirstDay: payload };
+    }
+    case 'END_DATE':{
+      return { ...state,  LastDay: payload };
+    }
+    case 'CLEAR_CALENDAR':{
+      return { ...state,  LastDay:'', FirstDay:'' };
     }
     default:
       return state;

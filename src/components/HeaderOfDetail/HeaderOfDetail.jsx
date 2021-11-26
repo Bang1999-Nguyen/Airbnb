@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { actFetchLocation, clearResult, findLocation, hideOverlay, plusAdult, selectAction, valueSelection } from '../../containers/Home/Carousel/module/action';
+import { actFetchLocation, findLocation, hideOverlay, plusAdult, selectAction, valueSelection } from '../../containers/Home/Carousel/module/action';
 import DatePicker from '../Calendar/Calendar';
 import { NavLink } from 'react-router-dom'
 import moment from 'moment'
 import '../Header/Header.scss'
-import { ADD__TRANSITION, GO_BACK } from '../../containers/Home/Carousel/module/types';
+import {  GO_BACK } from '../../containers/Home/Carousel/module/types';
 import Modal from '../Modal/Modal';
 import SignUp from '../Sign Up/SignUp';
 import LogOut from '../LogOut/LogOut';
@@ -95,11 +95,6 @@ export default function Header(props) {
     const setShowSignUp = () =>{
         setRegister(false);
         setModal(false)
-    }
-    const setPopup = () => {
-        setModal(true);
-        document.querySelector('.menu_select').style.display = 'block';
-        document.querySelector('.menu_select').style.transform = 'scale(1)';
     }
     const setClosePopup = () => {
         setModal(false);

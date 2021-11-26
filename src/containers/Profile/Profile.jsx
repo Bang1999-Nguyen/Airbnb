@@ -10,11 +10,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { css } from 'glamor';
 import ChangeProfile from './ChangeProfile/ChangeProfile';
 import Paginate from './Pagination';
-import { Redirect } from 'react-router-dom';
 import moment from 'moment'
 import { CHANGE_SUCCESS } from '../../components/Modal/module/types';
-import { USER_LOGIN_AIRBNB } from '../../settings/apiConfig';
-import Modal from '../../components/Modal/Modal';
+
 toast.configure({
     toastClassName: css({
         fontSize: '18px !important',
@@ -32,7 +30,6 @@ export default function Profile(props) {
         dispatch(actFetchTickets(currentUser?._id))
         dispatch(actFetchInformation(props.match.params.id))
     }, [show])
-    const IsUser = localStorage.getItem(USER_LOGIN_AIRBNB)
     const { tickets } = useSelector(state => state.ProfileReducer)
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage] = useState(6)
@@ -72,14 +69,9 @@ export default function Profile(props) {
     const onFormLayoutChange = ({ size }) => {
         setComponentSize(size);
     }
-   
     const [componentSize, setComponentSize] = useState('default');
     const [imgSrc, setImgSrc] = useState(null)
-    const [showModal, setShowModal] = useState(false)
-    const  goPrevious = () =>{
-      
-        setShowModal(true)
-    }
+    const [showModal,] = useState(false)
     const handleImage = (e) => {
         let file = e.target.files[0]
         if (file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/gif' || file.type === 'image/img') {
@@ -92,7 +84,7 @@ export default function Profile(props) {
             formik.setFieldValue('avatar', file)
         }
     }
-    return IsUser ? (
+    return  (
         <div className="profile">
             <div className="profile-img" >
             </div>
@@ -112,9 +104,14 @@ export default function Profile(props) {
                 <div className="profile-detail">
                     <ChangeProfile id={props.match.params.id} />
                 </div>
+               
                 <div className="text-custom">
+
                 </div>
             </div>
+            <div className="profile-custom">
+                <ChangeProfile id={props.match.params.id} />
+                </div>
             {showModal ? alert('1') : ''}
             <div className="tickets" >
                 <h1 className="stroke_ticket">HISTORY BOOKING</h1>
@@ -188,8 +185,5 @@ export default function Profile(props) {
                 </div>
             </div>
         </div >
-    ) : (
-        <Redirect to="/" />
-       
-      );
+    ) 
 }

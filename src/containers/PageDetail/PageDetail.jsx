@@ -9,11 +9,14 @@ import './PageDetail.scss'
 import ContentLoader from 'react-content-loader'
 import { TOKEN_MAP } from '../../settings/apiConfig';
 import Modal from '../../components/Modal/Modal';
+import BookingTicket from '../BookTicket/BookTicket';
 export default function PageDetail(props) {
     const { DetailOfLocation, loading, moreDetail } = useSelector(state => state.DetailReducer)
     const [show, setShow] = useState(false)
+
     const closeModalHandler = () => setShow(false)
     const dispatch = useDispatch()
+   
     useEffect(() => {
         dispatch(actFetchDetail(props.match.params.id))
         dispatch(getGuest(props.match.params.guest))
@@ -149,8 +152,8 @@ export default function PageDetail(props) {
                             }}
                         >
                         </ReactMapGL>
-                        
                     </div>
+                    
                 </div>
             </div>
         </div>

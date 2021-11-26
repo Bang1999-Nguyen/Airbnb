@@ -32,6 +32,9 @@ const initialState = {
      case FETCH_MORE_DETAIL:{
       return { ...state,  moreDetail: payload };
      }
+     case 'CUSTOM_ARRAY':{
+      return { ...state, DetailOfLocation: payload };
+     }
       default:
         return state;
     }

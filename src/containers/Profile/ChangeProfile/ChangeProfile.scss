@@ -286,3 +286,96 @@ margin:0 auto 20px auto;
         }
     }
 }
+@media only screen and (min-width:411px) and (max-width:736px){
+    .form-Change{
+        input {
+            font-size: 16px;
+            padding: 20px 10px 10px 0px;
+            height: 50px;
+            border: none;
+            margin-left:30px;
+            // border: solid 1px #b69de6;
+            background: #fff;
+            width:430px;
+            box-sizing: border-box;
+            transition: all 0.3s linear;
+            color: #000;
+            font-weight: 400;
+            -webkit-appearance: none;
+            margin-bottom: 10px;
+            border-radius: 0;
+          }
+          input:focus {
+            // border-bottom: solid 1px #b69de6;
+            outline: 0;
+            // box-shadow: 0 2px 6px -8px rgba(182, 157, 230, 0.45);
+          }
+    }
+    .gender-selection{
+        margin-left:0px;
+    }
+    .profile-name{
+        height:65px;
+        width: 90%;
+        background-color: white;
+        box-shadow:0 0 1px 0 rgba(10, 22, 70, 0.06), 0 12px 12px -1px rgba(10, 22, 70, 0.1);
+        border: 1px solid rgb(221, 221, 221);
+    border-radius: 10px ;
+    margin-bottom: 18px;
+    transition:all 0.5s ease-in-out;
+    cursor: pointer;
+    margin:0 auto 20px auto;
+    display:flex;
+        i{
+            line-height:65px;
+            font-size:25px;
+             color:rgba(183, 157, 230, 0.555);
+            text-align: left;
+            float:left;
+            margin-left:30px;
+            width:14%;
+        }
+        input:focus {
+            // border-bottom: solid 1px #b69de6;
+            outline:none!important
+            // box-shadow: 0 2px 6px -8px rgba(182, 157, 230, 0.45);
+          }
+        // &:hover{
+        //     transform: scale(1.1);
+        // }
+     }
+     .form-change{
+        .ant-picker {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            width:380px;
+            color: rgba(0, 0, 0, 0.85);
+            font-size: 14px;
+            font-variant: tabular-nums;
+            line-height: 1.5715;
+            list-style: none;
+            border:none!important;
+            font-feature-settings: 'tnum', "tnum";
+            padding: 4
+        px
+         11
+        px
+         4
+        px
+        ;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            background: #fff;
+            /* border: 1
+        px
+         solid #d9d9d9; */
+            border-radius: 2
+        px
+        ;
+            transition: border 0.3s, box-shadow 0.3s;
+            margin-left:10px;
+        }
+    }
+}

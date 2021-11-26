@@ -1141,3 +1141,49 @@
         font-size:27px!important;
     }
 }
+@media only screen and (min-width:411px) and (max-width:736px){
+    .room__detail{
+        display:block;
+        height:600px;
+        .room_image{
+            height:250px!important;
+        }
+    }
+    .room_evaluation{
+        display:none!important;
+    }
+    .ticket{
+       
+        .col-7{
+            display:none
+        }
+        .col-lg-5{
+            display:block;
+            width:98%!important;
+        }
+    }
+    .room__content{
+    margin-top:-40px;
+        width:98%!important;
+    }
+    .comment{
+        width:95%;
+    
+        margin:-550px auto 150px auto;
+        .comment-evaluate{
+            display:none
+        }
+        .comment-tit{
+            display:none
+        }
+        
+    }
+    .thanks{
+        font-size:14px!important;
+    }
+    .text-impressive{
+        font-size:16px!important;
+        line-height:-5px;
+       
+    }
+}

@@ -1,6 +1,5 @@
 import React from 'react'
 import LocationAdmin from '../containers/admin/Location/Location';
-import Location from '../containers/admin/Location/Location';
 import RoomStructure from '../containers/admin/Location/RoomStructure';
 import User from '../containers/admin/User/User';
 

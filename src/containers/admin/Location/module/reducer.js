@@ -18,7 +18,9 @@ const CarouselAdminReducer = (state = initialState, { type, payload }) => {
 
     case FETCH_ADMIN_FAIL:
       return { ...state, error: payload, loading: false };
-    
+    case 'CUSTOM_LOCATION':{
+      return { ...state,  listLocation: payload };
+    }
     default:
       return state;
   }

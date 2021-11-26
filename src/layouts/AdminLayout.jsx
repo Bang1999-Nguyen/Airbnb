@@ -3,13 +3,23 @@ import { Menu } from 'antd';
 import {
     TeamOutlined,
     VideoCameraOutlined,
-    DesktopOutlined
 } from '@ant-design/icons';
 import { Link, } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { actFetchInformation } from '../containers/Profile/module/action';
 import withLayout from '../hocs/withLayout';
 import { Redirect } from 'react-router-dom';
+import { USER_LOGIN_AIRBNB } from '../settings/apiConfig';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+import { css } from 'glamor';
+toast.configure({
+    toastClassName: css({
+        fontSize: '18px !important',
+        backgroundColor: 'red!important',
+        padding: '18px !important'
+    }),
+});
  function AdminLayout(props) {
     const dispatch = useDispatch()
     const { Information } = useSelector(state => state.ProfileReducer)
@@ -17,13 +27,23 @@ import { Redirect } from 'react-router-dom';
     useEffect(() => {
         dispatch(actFetchInformation(currentUser._id))
     }, [])
-
-    return currentUser.type === 'ADMIN' ?(
+    const waveFail = () => toast.error('You must have the admin role', {
+        position: toast.POSITION.TOP_CENTER, autoClose: 2500, backgroundColor: '#8329C5',
+        color: '#ffffff'
+    })
+    let  userSignIn = {}
+    if(localStorage.getItem(USER_LOGIN_AIRBNB)){
+        userSignIn = JSON.parse(localStorage.getItem(USER_LOGIN_AIRBNB))
+    }
+    if(!localStorage.getItem(USER_LOGIN_AIRBNB)){
+        waveFail()
+    }
+    return userSignIn.type === 'ADMIN' ?(
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-transparent py-3">
                 <div className="container-fluid">
                     <a href="#" aria-label="Back to homepage" className="flex items-center">
-                        <img src="https://cyberlearn.vn/wp-content/uploads/2020/03/cyberlearn-min-new-opt2.png" alt="" />
+                        <img src="https://cyberlearn.vn/wp-content/uploads/2020/03/cyberlearn-min-new-opt2.png" alt="image" />
                     </a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon" />
@@ -47,9 +67,6 @@ import { Redirect } from 'react-router-dom';
                         </div>
                         <div className="py-5 px-3">
                             <Menu theme="dark" mode="inline" defaultSelectedKeys='1' style={{ backgroundColor: 'transparent', padding: '0 20px' }} >
-                                <Menu.Item key="1" icon={<DesktopOutlined />}>
-                                    <Link to="/admin">Dashboard</Link>
-                                </Menu.Item>
                                 <Menu.Item key="2" icon={<VideoCameraOutlined />}>
                                     <Link to="/admin/location">Location</Link>
                                 </Menu.Item>
@@ -64,9 +81,11 @@ import { Redirect } from 'react-router-dom';
                     {props.children}
                 </div>
             </div>
+           
         </div>
     ) : (
         <Redirect to="/" />
+        
       );
 }
 export default withLayout(AdminLayout)

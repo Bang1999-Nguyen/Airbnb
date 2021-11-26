@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Modal from '../../components/Modal/Modal'
-import {  USER_LOGIN_AIRBNB } from '../../settings/apiConfig'
+import { USER_LOGIN_AIRBNB } from '../../settings/apiConfig'
 import { useSelector, useDispatch } from 'react-redux';
 import './BookTicket.scss'
 import moment from "moment"
@@ -28,7 +28,7 @@ toast.configure({
 });
 export default function BookingTicket(props) {
     const wave = () => toast.success('Delete  successfully👋', { position: toast.POSITION.TOP_RIGHT, autoClose: 2500 })
-    const { StartDate, EndDate, quantityPeople, totalPeopleDefault } = useSelector(state => state.CarouselReducer)
+    const { StartDate, EndDate, quantityPeople, totalPeopleDefault, FirstDay, LastDay } = useSelector(state => state.CarouselReducer)
     const { comment } = useSelector(state => state.RoomReducer)
     const { token, currentUser, on } = useSelector(state => state.authReducer)
     const [startDate, setStartDate] = useState(StartDate);
@@ -39,33 +39,59 @@ export default function BookingTicket(props) {
         checkIn: moment(props.match.params.startDate).format(),
         checkOut: moment(props.match.params.endDate).format(),
     })
-  
-    var durationEnd =  moment(EndDate).format('MM/DD/YYYY')
-    var durationStart =  moment(StartDate).format('MM/DD/YYYY')
-    var date1 = new Date(durationEnd);
-    var date2 = new Date(durationStart);
-    var Difference_In_Time = date2.getTime() - date1.getTime();
-    var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+    var durationEnd;
+    var durationStart;
+    if (FirstDay === '' && LastDay === '') {
+        durationEnd = moment(EndDate).format('YYYY/MM/DD')
+        durationStart = moment(StartDate).format('YYYY/MM/DD')
+    } else {
+        durationEnd = FirstDay
+        durationStart = LastDay
+    }
+
+    durationStart = durationStart.split('/');
+    durationStart = new Date(durationStart[0], durationStart[1], durationStart[2]);
+    durationEnd = durationEnd.split('/');
+    durationEnd = new Date(durationEnd[0], durationEnd[1], durationEnd[2]);
+    // var Difference_In_Days = Difference_In_Time / 24;
+    console.log(moment(props.match.params.startDate).format());
+    var date1 = JSON.stringify(durationStart).substr(1, 10);
+    var date2 = JSON.stringify(durationEnd).substr(1, 10);
+    // First we split the values to arrays date1[0] is the year, [1] the month and [2] the day
+    date1 = date1.split('-');
+    date2 = date2.split('-');
+    // Now we convert the array to a Date object, which has several helpful methods
+    date1 = new Date(date1[0], date1[1], date1[2]);
+    date2 = new Date(date2[0], date2[1], date2[2]);
+    // We use the getTime() method and get the unixtime (in milliseconds, but we want seconds, therefore we divide it through 1000)
+    var date1_unixtime = parseInt(date1.getTime() / 1000);
+    var date2_unixtime = parseInt(date2.getTime() / 1000);
+    // // This is the calculated difference in seconds
+    var timeDifference = Math.abs(date2_unixtime - date1_unixtime);
+    // in Hours
+    var timeDifferenceInHours = timeDifference / 60 / 60;
+    // and finaly, in days :)
+    var Difference_In_Days = timeDifferenceInHours / 24;
     function SampleNextArrow(props) {
         const { className, style, onClick } = props;
         return (
-          <div
-            className={className}
-            style={{ ...style, display: "block", background: "red" }}
-            onClick={onClick}
-          />
+            <div
+                className={className}
+                style={{ ...style, display: "block", background: "red" }}
+                onClick={onClick}
+            />
         );
-      }
-      function SamplePrevArrow(props) {
+    }
+    function SamplePrevArrow(props) {
         const { className, style, onClick } = props;
         return (
-          <div
-            className={className}
-            style={{ ...style, display: "block", background: "green" }}
-            onClick={onClick}
-          />
+            <div
+                className={className}
+                style={{ ...style, display: "block", background: "green" }}
+                onClick={onClick}
+            />
         );
-      }
+    }
     const settings = {
         className: "center",
         centerMode: true,
@@ -78,16 +104,26 @@ export default function BookingTicket(props) {
         prevArrow: <SamplePrevArrow />,
         responsive: [
             {
-              breakpoint: 1024,
-              settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1,
-                infinite: true,
-                dots: true
-              }
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: true
+                }
             },
         ]
-      };
+    };
+
     const [focusedInput, setFocusedInput] = useState(null);
     const handleDatesChange = ({ startDate, endDate }) => {
         setStartDate(startDate);
@@ -97,8 +133,12 @@ export default function BookingTicket(props) {
             checkIn: moment(startDate).format(),
             checkOut: moment(endDate).format()
         }));
-        
-    dispatch(isCalendar(startDate, endDate))
+
+        dispatch(isCalendar(startDate, endDate))
+        dispatch({
+            type: 'CLEAR_CALENDAR',
+            payload: null
+        })
     };
     let user = localStorage.getItem(USER_LOGIN_AIRBNB)
     const [modal, setModal] = useState(false);
@@ -111,8 +151,6 @@ export default function BookingTicket(props) {
             .catch(error => {
                 console.log(error);
             });
-        
-
     }
     const [isQuantity, setIsQuantity] = useState(false)
     const updateComment = (id) => {
@@ -136,6 +174,8 @@ export default function BookingTicket(props) {
         dispatch(getGuest(props.match.params.guest))
         dispatch(getCurrentDate(props.match.params.startDate, props.match.params.endDate))
         dispatch(actFetchComment(props.match.params.id))
+        dispatch(isCalendar(moment(props.match.params.startDate).format(), moment(props.match.params.endDate).format()))
+
     }, [])
     const collect = () => {
         dispatch(actFetchComment(props.match.params.id))
@@ -183,7 +223,7 @@ export default function BookingTicket(props) {
                                     setModal(false)
                                 }, 800)}><i class="fas fa-chevron-left"></i>Close</p>
                                 <span>
-                                    <NavLink to={`/profile/${currentUser._id}`} className="go_to" onClick={() => window.scrollTo(0,0)}>Go to your profile</NavLink>
+                                    <NavLink to={`/profile/${currentUser._id}`} className="go_to" onClick={() => window.scrollTo(0, 0)}>Go to your profile</NavLink>
                                     <i class="fas fa-chevron-right"></i>
                                 </span>
                             </div>
@@ -287,7 +327,7 @@ export default function BookingTicket(props) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-lg-5 col-sm-12">
+                                    <div className="col-lg-5 col-sm-12 col-sx-12">
                                         <div className="payment">
                                             <div className="price">
                                                 <div className="row">
@@ -400,7 +440,7 @@ export default function BookingTicket(props) {
                                                     <h2 className="total_payment">Total</h2>
                                                 </div>
                                                 <div className="money">
-                                                    <h3>{((DetailOfRoom?.price * props.match.params.guest) + 150000).toLocaleString()} VNĐ</h3>
+                                                    <h3>{((DetailOfRoom?.price * Math.abs(Difference_In_Days)) + 150000).toLocaleString()}VNĐ</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -499,77 +539,72 @@ export default function BookingTicket(props) {
                                 </div>
                             </div>
                         </div>
-                        {/* <div className="comment-value">
-                            <div  >
-                               
-                            </div>
-                        </div> */}
                     </div>
                     <div className="comment-condition">
                         <h1>Leaving comments if yow want</h1>
-                        <blockquote before="“" lang="en" className="h4 md-h2 center before-content before-green-light " style={{ fontStyle: 'italic' }}><p style={{ fontWeight: '400',  width: '75%', margin: '0 auto', lineHeight: '20px' }} className="text-impressive"> <svg width="45" height={55} className="mb-5 fill-current text-fuchsia-100 " style={{ fill: 'crimson', marginRight: '50px', }}><path d="M13.415.001C6.07 5.185.887 13.681.887 23.041c0 7.632 4.608 12.096 9.936 12.096 5.04 0 8.784-4.032 8.784-8.784 0-4.752-3.312-8.208-7.632-8.208-.864 0-2.016.144-2.304.288.72-4.896 5.328-10.656 9.936-13.536L13.415.001zm24.768 0c-7.2 5.184-12.384 13.68-12.384 23.04 0 7.632 4.608 12.096 9.936 12.096 4.896 0 8.784-4.032 8.784-8.784 0-4.752-3.456-8.208-7.776-8.208-.864 0-1.872.144-2.16.288.72-4.896 5.184-10.656 9.792-13.536L38.183.001z"></path></svg> Absolutely in love with how easy and effective evaluation with <a href="https://twitter.com/surge_sh">your comments</a>&nbsp;is.</p><footer className="md-col-4 mx-auto left-align"><a href="https://twitter.com/fox/status/597723128488398848" className="media color-inherit"><p className="media-body h6 black muted"></p></a></footer></blockquote>
+                        <blockquote before="“" lang="en" className="h4 md-h2 center before-content before-green-light " style={{ fontStyle: 'italic' }}><p style={{ fontWeight: '400', width: '75%', margin: '0 auto', lineHeight: '20px' }} className="text-impressive"> <svg width="45" height={55} className="mb-5 fill-current text-fuchsia-100 " style={{ fill: 'crimson', marginRight: '50px', }}><path d="M13.415.001C6.07 5.185.887 13.681.887 23.041c0 7.632 4.608 12.096 9.936 12.096 5.04 0 8.784-4.032 8.784-8.784 0-4.752-3.312-8.208-7.632-8.208-.864 0-2.016.144-2.304.288.72-4.896 5.328-10.656 9.936-13.536L13.415.001zm24.768 0c-7.2 5.184-12.384 13.68-12.384 23.04 0 7.632 4.608 12.096 9.936 12.096 4.896 0 8.784-4.032 8.784-8.784 0-4.752-3.456-8.208-7.776-8.208-.864 0-1.872.144-2.16.288.72-4.896 5.184-10.656 9.792-13.536L38.183.001z"></path></svg> Absolutely in love with how easy and effective evaluation with <a href="https://twitter.com/surge_sh">your comments</a>&nbsp;is.</p><footer className="md-col-4 mx-auto left-align"><a href="https://twitter.com/fox/status/597723128488398848" className="media color-inherit"><p className="media-body h6 black muted"></p></a></footer></blockquote>
                         {
                             comment.length > 3 ? (
                                 <Slider {...settings}>
-                           {
-                              comment?.map((item, index) =>{
-                                   return (
-                                       <div className="col-6-res" key={index} >
-                                           <div className="people-evaluation">
-                                               <div className="people-i" style={{ backgroundImage: `url(${item.userId.avatar})`, width: '80px', height: '80px', borderRadius: '10px', backgroundPosition: 'center', backgroundSize: 'cover' }}>
-                                                 
-                                               </div>
-                                               <div className="address">
-                                                   <h2>- {item.userId.name}</h2>
-                                                   <p>{moment(item.userId.created_at).format('DD/MM/YYYY')}</p>
-                                               </div>
-                                           </div>
-                                           <div className="descr">
-                                               <p>{item.content}</p>
-                                               <span><i class="fas fa-heart"></i>Like</span>
-                                               <span style={{ marginLeft: '40px' }} onClick={() => deleteComment(item._id)}><i class="fas fa-trash-alt"></i>Delete</span>
-                                               <span style={{ marginLeft: '40px' }} onClick={() => updateComment(item._id)}><i class="fas fa-trash-alt"></i>Update</span>
-                                           </div>
-                                       </div>
-                                   )
-                               })
-                           } 
-                            </Slider> 
-                            ):   <div className="slider-show slider-show-add">
-                            <div className="row">
-                                 {
-                              comment?.map((item, index) =>{
-                                   return (
-                                       <div className="col-6-res item-show" key={index} >
-                                           <div className="people-evaluation">
-                                               <div className="people-i" style={{ backgroundImage: `url(${item.userId.avatar})`, width: '80px', height: '80px', borderRadius: '10px', backgroundPosition: 'center', backgroundSize: 'cover' }}>
-                                                 
-                                               </div>
-                                               <div className="address">
-                                                   <h2>- {item.userId.name}</h2>
-                                                   <p>{moment(item.userId.created_at).format('DD/MM/YYYY')}</p>
-                                               </div>
-                                           </div>
-                                           <div className="descr">
-                                               <p>{item.content}</p>
-                                               <span><i class="fas fa-heart"></i>Like</span>
-                                               <span style={{ marginLeft: '40px' }} onClick={() => deleteComment(item._id)}><i class="fas fa-trash-alt"></i>Delete</span>
-                                               <span style={{ marginLeft: '40px' }} onClick={() => updateComment(item._id)}><i class="fas fa-trash-alt"></i>Update</span>
-                                           </div>
-                                       </div>
-                                   )
-                               })
-                           } 
+                                    {
+                                        comment?.map((item, index) => {
+                                            return (
+                                                <div className="col-6-res" key={index} >
+                                                    <div className="people-evaluation">
+                                                        <div className="people-i" style={{ backgroundImage: `url(${item?.userId?.avatar})`, width: '80px', height: '80px', borderRadius: '10px', backgroundPosition: 'center', backgroundSize: 'cover' }}>
+
+                                                        </div>
+                                                        <div className="address">
+                                                            <h2>- {item.userId?.name}</h2>
+                                                            <p>{moment(item.userId?.created_at).format('DD/MM/YYYY')}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="descr">
+                                                        <p>{item.content}</p>
+                                                        <span><i class="fas fa-heart"></i>Like</span>
+                                                        <span style={{ marginLeft: '40px' }} onClick={() => deleteComment(item._id)}><i class="fas fa-trash-alt"></i>Delete</span>
+                                                        <span style={{ marginLeft: '40px' }} onClick={() => updateComment(item._id)}><i class="fas fa-trash-alt"></i>Update</span>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </Slider>
+                            ) : <div className="slider-show slider-show-add">
+                                <div className="row">
+                                    {
+                                        comment?.map((item, index) => {
+                                            return (
+                                                <div className="col-6-res item-show" key={index} >
+                                                    <div className="people-evaluation">
+                                                        <div className="people-i" style={{ backgroundImage: `url(${item.userId?.avatar})`, width: '80px', height: '80px', borderRadius: '10px', backgroundPosition: 'center', backgroundSize: 'cover' }}>
+
+                                                        </div>
+                                                        <div className="address">
+                                                            <h2>- {item?.userId.name}</h2>
+                                                            <p>{moment(item?.userId.created_at).format('DD/MM/YYYY')}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="descr">
+                                                        <p>{item.content}</p>
+                                                        <span><i class="fas fa-heart"></i>Like</span>
+                                                        <span style={{ marginLeft: '40px' }} onClick={() => deleteComment(item._id)}><i class="fas fa-trash-alt"></i>Delete</span>
+                                                        <span style={{ marginLeft: '40px' }} onClick={() => updateComment(item._id)}><i class="fas fa-trash-alt"></i>Update</span>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
                             </div>
-                            </div>
-                        } 
+                        }
                     </div>
                     <div className="btn-add">
                         <button onClick={() => showEvaluate()}>LEAVE A COMMENT</button>
                     </div>
                     {evaluation ? <div className="back_drop"></div> : null}
                     <Comment show={evaluation} closeModalHandler={closeModalEvaluation} btn={btn} id={props.match.params.id} collect={collect} />
-                   
+
                 </div>
             </div>
         </div>
